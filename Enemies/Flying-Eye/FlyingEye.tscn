@@ -123,6 +123,7 @@ states/take_damage/position = Vector2(609, 269)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3165y"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_ndbyi"), "death", "End", SubResource("AnimationNodeStateMachineTransition_4rfbf"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_qwtsr"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_0j826"), "idle", "take_damage", SubResource("AnimationNodeStateMachineTransition_u7bb0"), "take_damage", "idle", SubResource("AnimationNodeStateMachineTransition_5dc8a"), "attack", "take_damage", SubResource("AnimationNodeStateMachineTransition_brq14")]
 
 [node name="FlyingEye" type="CharacterBody2D"]
+z_index = 4
 script = ExtResource("1_osiu1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -134,7 +135,7 @@ metadata/_edit_lock_ = true
 texture = ExtResource("1_nul23")
 hframes = 8
 vframes = 4
-frame = 4
+frame = 6
 metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
