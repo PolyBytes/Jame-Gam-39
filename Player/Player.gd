@@ -9,7 +9,7 @@ func _ready():
 	$AnimatedSprite2D.play("Idle")
 
 func _process(_delta):
-	if Input.is_action_just_pressed("die"):
+	if Input.is_action_just_pressed("debug_testing_die"):
 		is_slain = true
 
 func _physics_process(delta):
