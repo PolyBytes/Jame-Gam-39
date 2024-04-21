@@ -114,8 +114,6 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fs0wu"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pnnnp"]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lvwxd"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_uxqs2"]
@@ -131,6 +129,8 @@ switch_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_84h0b"]
 switch_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u0adj"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_noype"]
 states/End/position = Vector2(606, 100)
 states/Start/position = Vector2(307, 11)
@@ -144,7 +144,7 @@ states/roll/node = SubResource("AnimationNodeAnimation_s2fhv")
 states/roll/position = Vector2(464, 255)
 states/run/node = SubResource("AnimationNodeAnimation_t2lif")
 states/run/position = Vector2(153, 255)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_yextu"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_fs0wu"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_pnnnp"), "idle", "roll", SubResource("AnimationNodeStateMachineTransition_lvwxd"), "idle", "block", SubResource("AnimationNodeStateMachineTransition_uxqs2"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_lo6dv"), "death", "End", SubResource("AnimationNodeStateMachineTransition_ngpva"), "roll", "idle", SubResource("AnimationNodeStateMachineTransition_ear6v"), "block", "idle", SubResource("AnimationNodeStateMachineTransition_84h0b")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_yextu"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_fs0wu"), "idle", "roll", SubResource("AnimationNodeStateMachineTransition_lvwxd"), "idle", "block", SubResource("AnimationNodeStateMachineTransition_uxqs2"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_lo6dv"), "death", "End", SubResource("AnimationNodeStateMachineTransition_ngpva"), "roll", "idle", SubResource("AnimationNodeStateMachineTransition_ear6v"), "block", "idle", SubResource("AnimationNodeStateMachineTransition_84h0b"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_u0adj")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o4jsr"]
 size = Vector2(11, 23)

@@ -32,7 +32,7 @@ func handle_input() -> Vector2:
 	
 	if horizontal_direction:
 		# Handle Sprite Horizontal Orientation
-		#$AnimatedSprite2D.flip_h = true if roundi(horizontal_direction) == -1 else false
+		$Sprite2D.flip_h = true if roundi(horizontal_direction) == -1 else false
 		
 		input_vector.x = horizontal_direction
 
