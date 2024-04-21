@@ -1,20 +1,35 @@
-[gd_scene load_steps=27 format=3 uid="uid://wtvoou0ci41m"]
+[gd_scene load_steps=42 format=3 uid="uid://wtvoou0ci41m"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_ojtx6"]
 [ext_resource type="Texture2D" uid="uid://bfxj1e1rjla68" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip1.png" id="2_makes"]
+[ext_resource type="Texture2D" uid="uid://b0mkoaf7hadnn" path="res://Player/SpriteSheets/Death/noBKG_KnightDeath_strip1.png" id="2_vvrjm"]
+[ext_resource type="Texture2D" uid="uid://qduosw1aub1g" path="res://Player/SpriteSheets/Death/noBKG_KnightDeath_strip2.png" id="3_if1tu"]
 [ext_resource type="Texture2D" uid="uid://0seqhpnid3rh" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip2.png" id="3_x4oa7"]
 [ext_resource type="Texture2D" uid="uid://dmhqglwojikgi" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip3.png" id="4_ltrc8"]
+[ext_resource type="Texture2D" uid="uid://cif5jf3q4slob" path="res://Player/SpriteSheets/Death/noBKG_KnightDeath_strip3.png" id="4_m1r3o"]
+[ext_resource type="Texture2D" uid="uid://u84fongxwmy7" path="res://Player/SpriteSheets/Death/noBKG_KnightDeath_strip4.png" id="5_agfyw"]
 [ext_resource type="Texture2D" uid="uid://nxltj1sew8da" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip4.png" id="5_lwb6f"]
+[ext_resource type="Texture2D" uid="uid://c0lwcnpfhig8y" path="res://Player/SpriteSheets/Death/noBKG_KnightDeath_strip5.png" id="6_efoan"]
 [ext_resource type="Texture2D" uid="uid://qtluvjkpwqy0" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip5.png" id="6_rfqdf"]
+[ext_resource type="Texture2D" uid="uid://b3ayf1capjf3i" path="res://Player/SpriteSheets/Death/noBKG_KnightDeath_strip6.png" id="7_8jpy7"]
 [ext_resource type="Texture2D" uid="uid://bh8bu30gp2m4d" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip6.png" id="7_qmvsi"]
+[ext_resource type="Texture2D" uid="uid://blaxi206jig06" path="res://Player/SpriteSheets/Death/noBKG_KnightDeath_strip7.png" id="8_fditk"]
 [ext_resource type="Texture2D" uid="uid://bo3yydm2kxks7" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip7.png" id="8_ytrr5"]
+[ext_resource type="Texture2D" uid="uid://dhe575dom6cfd" path="res://Player/SpriteSheets/Death/noBKG_KnightDeath_strip8.png" id="9_2u7ci"]
 [ext_resource type="Texture2D" uid="uid://b08jgihroip7c" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip8.png" id="9_douup"]
+[ext_resource type="Texture2D" uid="uid://c7axd5e3ma2nh" path="res://Player/SpriteSheets/Death/noBKG_KnightDeath_strip9.png" id="10_2gudg"]
 [ext_resource type="Texture2D" uid="uid://r5sraakgr218" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip9.png" id="10_jqduv"]
 [ext_resource type="Texture2D" uid="uid://bnnoj8rikpqao" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip10.png" id="11_5712m"]
+[ext_resource type="Texture2D" uid="uid://bpblqd0eo2k1t" path="res://Player/SpriteSheets/Death/noBKG_KnightDeath_strip10.png" id="11_knw71"]
 [ext_resource type="Texture2D" uid="uid://b506utwawtdpx" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip11.png" id="12_vke1m"]
+[ext_resource type="Texture2D" uid="uid://44tunxjjyvtx" path="res://Player/SpriteSheets/Death/noBKG_KnightDeath_strip11.png" id="12_w51b8"]
 [ext_resource type="Texture2D" uid="uid://chwjr53sys3we" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip12.png" id="13_5o2bb"]
+[ext_resource type="Texture2D" uid="uid://bxe1ci37s8b3x" path="res://Player/SpriteSheets/Death/noBKG_KnightDeath_strip12.png" id="13_b6xf4"]
+[ext_resource type="Texture2D" uid="uid://cd65lsmptwo2g" path="res://Player/SpriteSheets/Death/noBKG_KnightDeath_strip13.png" id="14_ivskc"]
 [ext_resource type="Texture2D" uid="uid://crnigptkmfygg" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip13.png" id="14_q1vhl"]
 [ext_resource type="Texture2D" uid="uid://3cmvmcs544te" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip14.png" id="15_bmawf"]
+[ext_resource type="Texture2D" uid="uid://cocfnjyxjf4ti" path="res://Player/SpriteSheets/Death/noBKG_KnightDeath_strip14.png" id="15_ctt3h"]
+[ext_resource type="Texture2D" uid="uid://dkt4hds3y18iq" path="res://Player/SpriteSheets/Death/noBKG_KnightDeath_strip15.png" id="16_06omc"]
 [ext_resource type="Texture2D" uid="uid://c576uh2ivkpcm" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip15.png" id="16_hphlo"]
 [ext_resource type="Texture2D" uid="uid://msn8pteam4bv" path="res://Player/SpriteSheets/Run/noBKG_KnightRun_strip1.png" id="17_t2ht1"]
 [ext_resource type="Texture2D" uid="uid://bvjbmh50fanx1" path="res://Player/SpriteSheets/Run/noBKG_KnightRun_strip2.png" id="18_q5rpr"]
@@ -27,6 +42,56 @@
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_se748"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vvrjm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_if1tu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_m1r3o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_agfyw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_efoan")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_8jpy7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_fditk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_2u7ci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_2gudg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_knw71")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_w51b8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_b6xf4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ivskc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ctt3h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_06omc")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_makes")
@@ -73,7 +138,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("16_hphlo")
 }],
-"loop": true,
+"loop": false,
 "name": &"Idle",
 "speed": 10.0
 }, {
@@ -117,8 +182,7 @@ script = ExtResource("1_ojtx6")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_se748")
-animation = &"Run"
-frame_progress = 0.965252
+animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.5, -14.5)
