@@ -3,10 +3,13 @@ class_name Player extends CharacterBody2D
 const MAX_VELOCITY = 100.0
 const ACCELERATION = 1000.0
 
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var animation_state = animation_tree.get("parameters/playback")
+
 var is_slain: bool = false
 
-func _ready():
-	$AnimatedSprite2D.play("Idle")
+#func _ready():
+	#$AnimatedSprite2D.play("Idle")
 
 func _process(_delta):
 	if Input.is_action_just_pressed("debug_testing_die"):
@@ -29,7 +32,7 @@ func handle_input() -> Vector2:
 	
 	if horizontal_direction:
 		# Handle Sprite Horizontal Orientation
-		$AnimatedSprite2D.flip_h = true if roundi(horizontal_direction) == -1 else false
+		#$AnimatedSprite2D.flip_h = true if roundi(horizontal_direction) == -1 else false
 		
 		input_vector.x = horizontal_direction
 
@@ -57,11 +60,10 @@ func update_velocity(delta: float, input_vector: Vector2):
 
 func handle_animation_states():
 	if is_slain:
-		if $AnimatedSprite2D.animation != "Death":
-			$AnimatedSprite2D.play("Death")
+		animation_state.travel("death")
 		return
-	
+
 	if velocity.length() > 0:
-		$AnimatedSprite2D.play("Run")
+		animation_state.travel("run")
 	else:
-		$AnimatedSprite2D.play("Idle")
+		animation_state.travel("idle")
