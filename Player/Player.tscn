@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://wtvoou0ci41m"]
+[gd_scene load_steps=27 format=3 uid="uid://wtvoou0ci41m"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_ojtx6"]
 [ext_resource type="Texture2D" uid="uid://bfxj1e1rjla68" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip1.png" id="2_makes"]
@@ -16,6 +16,14 @@
 [ext_resource type="Texture2D" uid="uid://crnigptkmfygg" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip13.png" id="14_q1vhl"]
 [ext_resource type="Texture2D" uid="uid://3cmvmcs544te" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip14.png" id="15_bmawf"]
 [ext_resource type="Texture2D" uid="uid://c576uh2ivkpcm" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip15.png" id="16_hphlo"]
+[ext_resource type="Texture2D" uid="uid://msn8pteam4bv" path="res://Player/SpriteSheets/Run/noBKG_KnightRun_strip1.png" id="17_t2ht1"]
+[ext_resource type="Texture2D" uid="uid://bvjbmh50fanx1" path="res://Player/SpriteSheets/Run/noBKG_KnightRun_strip2.png" id="18_q5rpr"]
+[ext_resource type="Texture2D" uid="uid://cj1px6fkafw21" path="res://Player/SpriteSheets/Run/noBKG_KnightRun_strip3.png" id="19_57acs"]
+[ext_resource type="Texture2D" uid="uid://cmvkb3q6id3bb" path="res://Player/SpriteSheets/Run/noBKG_KnightRun_strip4.png" id="20_lqy06"]
+[ext_resource type="Texture2D" uid="uid://bh0pj37u7nnvm" path="res://Player/SpriteSheets/Run/noBKG_KnightRun_strip5.png" id="21_p05j5"]
+[ext_resource type="Texture2D" uid="uid://diw61tfbtugfr" path="res://Player/SpriteSheets/Run/noBKG_KnightRun_strip6.png" id="22_tiuvm"]
+[ext_resource type="Texture2D" uid="uid://dxtnjxkpaa0ch" path="res://Player/SpriteSheets/Run/noBKG_KnightRun_strip7.png" id="23_rrtsn"]
+[ext_resource type="Texture2D" uid="uid://h4aelr3bci6i" path="res://Player/SpriteSheets/Run/noBKG_KnightRun_strip8.png" id="24_0yuwu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_se748"]
 animations = [{
@@ -67,7 +75,36 @@ animations = [{
 }],
 "loop": true,
 "name": &"Idle",
-"speed": 12.0
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_t2ht1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_q5rpr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_57acs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_lqy06")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_p05j5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_tiuvm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_rrtsn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_0yuwu")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 10.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o4jsr"]
@@ -80,8 +117,8 @@ script = ExtResource("1_ojtx6")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_se748")
-animation = &"Idle"
-frame_progress = 0.182316
+animation = &"Run"
+frame_progress = 0.965252
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.5, -14.5)

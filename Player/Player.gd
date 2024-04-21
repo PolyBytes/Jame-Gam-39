@@ -8,6 +8,7 @@ func _ready():
 
 func _physics_process(delta):
 	handle_input(delta)
+	handle_animation_states()
 	move_and_slide()
 
 func handle_input(delta):
@@ -37,3 +38,9 @@ func handle_input(delta):
 	
 	if velocity.length() > MAX_VELOCITY:
 		velocity = velocity.limit_length(MAX_VELOCITY)
+
+func handle_animation_states():
+	if velocity.length() > 0:
+		$AnimatedSprite2D.play("Run")
+	else:
+		$AnimatedSprite2D.play("Idle")
