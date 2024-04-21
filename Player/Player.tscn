@@ -1,0 +1,91 @@
+[gd_scene load_steps=19 format=3 uid="uid://wtvoou0ci41m"]
+
+[ext_resource type="Script" path="res://Player/Player.gd" id="1_ojtx6"]
+[ext_resource type="Texture2D" uid="uid://bfxj1e1rjla68" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip1.png" id="2_makes"]
+[ext_resource type="Texture2D" uid="uid://0seqhpnid3rh" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip2.png" id="3_x4oa7"]
+[ext_resource type="Texture2D" uid="uid://dmhqglwojikgi" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip3.png" id="4_ltrc8"]
+[ext_resource type="Texture2D" uid="uid://nxltj1sew8da" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip4.png" id="5_lwb6f"]
+[ext_resource type="Texture2D" uid="uid://qtluvjkpwqy0" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip5.png" id="6_rfqdf"]
+[ext_resource type="Texture2D" uid="uid://bh8bu30gp2m4d" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip6.png" id="7_qmvsi"]
+[ext_resource type="Texture2D" uid="uid://bo3yydm2kxks7" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip7.png" id="8_ytrr5"]
+[ext_resource type="Texture2D" uid="uid://b08jgihroip7c" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip8.png" id="9_douup"]
+[ext_resource type="Texture2D" uid="uid://r5sraakgr218" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip9.png" id="10_jqduv"]
+[ext_resource type="Texture2D" uid="uid://bnnoj8rikpqao" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip10.png" id="11_5712m"]
+[ext_resource type="Texture2D" uid="uid://b506utwawtdpx" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip11.png" id="12_vke1m"]
+[ext_resource type="Texture2D" uid="uid://chwjr53sys3we" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip12.png" id="13_5o2bb"]
+[ext_resource type="Texture2D" uid="uid://crnigptkmfygg" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip13.png" id="14_q1vhl"]
+[ext_resource type="Texture2D" uid="uid://3cmvmcs544te" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip14.png" id="15_bmawf"]
+[ext_resource type="Texture2D" uid="uid://c576uh2ivkpcm" path="res://Player/SpriteSheets/Idle/noBKG_KnightShield_strip15.png" id="16_hphlo"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_se748"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_makes")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_x4oa7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ltrc8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_lwb6f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rfqdf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_qmvsi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ytrr5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_douup")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_jqduv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_5712m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_vke1m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_5o2bb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_q1vhl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_bmawf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_hphlo")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o4jsr"]
+size = Vector2(11, 23)
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 1
+script = ExtResource("1_ojtx6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_se748")
+animation = &"Idle"
+frame_progress = 0.182316
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5, -14.5)
+shape = SubResource("RectangleShape2D_o4jsr")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
