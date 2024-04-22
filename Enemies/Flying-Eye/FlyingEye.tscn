@@ -95,24 +95,8 @@ tracks/1/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_jgs5y"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CPUParticles2D:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wdqqu"]
 _data = {
-"RESET": SubResource("Animation_jgs5y"),
 "attack": SubResource("Animation_o67j0"),
 "death": SubResource("Animation_7fpdq"),
 "idle": SubResource("Animation_2cqkv"),
@@ -150,23 +134,23 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wfdrb"]
-switch_mode = 2
-advance_mode = 2
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rc3v4"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ogt2h"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_6cvl2"]
 states/End/position = Vector2(782, 171)
 states/Start/position = Vector2(507, 80)
 states/attack/node = SubResource("AnimationNodeAnimation_8poik")
-states/attack/position = Vector2(416, 269)
+states/attack/position = Vector2(398, 274)
 states/death/node = SubResource("AnimationNodeAnimation_4n00x")
 states/death/position = Vector2(642, 171)
 states/idle/node = SubResource("AnimationNodeAnimation_hwbct")
 states/idle/position = Vector2(507, 171)
 states/take_damage/node = SubResource("AnimationNodeAnimation_k6jgb")
-states/take_damage/position = Vector2(608, 269)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3165y"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_ndbyi"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_qwtsr"), "idle", "take_damage", SubResource("AnimationNodeStateMachineTransition_u7bb0"), "attack", "take_damage", SubResource("AnimationNodeStateMachineTransition_brq14"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_su5ju"), "take_damage", "idle", SubResource("AnimationNodeStateMachineTransition_py42s"), "death", "End", SubResource("AnimationNodeStateMachineTransition_wfdrb")]
-graph_offset = Vector2(192, 131)
+states/take_damage/position = Vector2(642, 274)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3165y"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_ndbyi"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_qwtsr"), "idle", "take_damage", SubResource("AnimationNodeStateMachineTransition_u7bb0"), "attack", "take_damage", SubResource("AnimationNodeStateMachineTransition_brq14"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_su5ju"), "take_damage", "idle", SubResource("AnimationNodeStateMachineTransition_py42s"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_rc3v4"), "take_damage", "death", SubResource("AnimationNodeStateMachineTransition_ogt2h")]
+graph_offset = Vector2(171, 66)
 
 [node name="FlyingEye" type="Area2D"]
 z_index = 4
@@ -182,6 +166,7 @@ position = Vector2(-5, -8)
 texture = ExtResource("1_nul23")
 hframes = 8
 vframes = 4
+frame = 2
 metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -190,9 +175,6 @@ libraries = {
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_wdqqu")
-}
 tree_root = SubResource("AnimationNodeStateMachine_6cvl2")
 anim_player = NodePath("../AnimationPlayer")
 

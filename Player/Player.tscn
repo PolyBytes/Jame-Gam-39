@@ -216,9 +216,6 @@ libraries = {
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../Sprite2D")
-libraries = {
-"": SubResource("AnimationLibrary_f48eo")
-}
 tree_root = SubResource("AnimationNodeStateMachine_noype")
 anim_player = NodePath("../AnimationPlayer")
 

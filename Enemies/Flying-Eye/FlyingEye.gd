@@ -20,11 +20,11 @@ func _ready():
 
 func _process(delta):
 	if not is_alive:
-		animation_state.travel("death")
-		set_process(false)
-	
-	handle_player_targeting(delta)
-	handle_attacking()
+		if animation_state.get_current_node() != "death":
+			animation_state.travel("death")
+	else:
+		handle_player_targeting(delta)
+		handle_attacking()
 
 func handle_player_targeting(delta: float):
 	if not target_player:
