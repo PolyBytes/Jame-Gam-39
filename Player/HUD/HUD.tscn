@@ -1,0 +1,124 @@
+[gd_scene load_steps=13 format=3 uid="uid://b3kfblmkpt121"]
+
+[ext_resource type="Script" path="res://Player/HUD/HUD.gd" id="1_qukus"]
+[ext_resource type="Shader" path="res://Player/HUD/Shaders/HealthBaublePixelShader.gdshader" id="2_15g5q"]
+[ext_resource type="Texture2D" uid="uid://bn8qcavg0ng3h" path="res://Player/HUD/Textures/HealthAmountSprite.png" id="3_pvd1t"]
+[ext_resource type="Texture2D" uid="uid://coo4iejre0yc5" path="res://Player/HUD/Textures/frame.png" id="4_pbcio"]
+[ext_resource type="Shader" path="res://Player/HUD/Shaders/BarDrain.gdshader" id="5_kvivj"]
+[ext_resource type="Texture2D" uid="uid://bu20hpmgtcair" path="res://Player/HUD/Textures/Bar1.png" id="6_mks22"]
+[ext_resource type="Texture2D" uid="uid://ds34mqu23mt7m" path="res://Player/HUD/Textures/Bar2.png" id="7_oaeot"]
+[ext_resource type="Texture2D" uid="uid://x5uad1urdqxv" path="res://Player/HUD/Textures/Bar3.png" id="8_luqps"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_irgj6"]
+shader = ExtResource("2_15g5q")
+shader_parameter/backFillColour = Color(0.52549, 0.137255, 0.682353, 1)
+shader_parameter/frontFillInnerColour = Color(0.870588, 0.223529, 0.913725, 1)
+shader_parameter/frontFillOuterColour = Color(0.180392, 0.117647, 0.360784, 1)
+shader_parameter/ringColour = Color(0.0705882, 0.0588235, 0.156863, 1)
+shader_parameter/fresnelColour = Color(0.968627, 0.572549, 0.894118, 1)
+shader_parameter/innerRingGlowColour = Color(0, 0, 0, 1)
+shader_parameter/fillcolour = Color(1, 1, 1, 1)
+shader_parameter/ringWidth = 0.0
+shader_parameter/innerCircleRadiusOffset = 0.0
+shader_parameter/fill_per = 1.0
+shader_parameter/resolution = 20.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xds1v"]
+shader = ExtResource("5_kvivj")
+shader_parameter/percentage = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0i1og"]
+shader = ExtResource("5_kvivj")
+shader_parameter/percentage = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yy1jw"]
+shader = ExtResource("5_kvivj")
+shader_parameter/percentage = 1.0
+
+[node name="Hud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qukus")
+metadata/_edit_lock_ = true
+
+[node name="HealthBar" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 9.0
+offset_bottom = 9.0
+metadata/_edit_lock_ = true
+
+[node name="HealthBauble" type="TextureRect" parent="HealthBar"]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_irgj6")
+layout_mode = 0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 52.0
+offset_bottom = 52.0
+scale = Vector2(1.925, 1.925)
+texture = ExtResource("3_pvd1t")
+metadata/_edit_lock_ = true
+
+[node name="Frame" type="TextureRect" parent="HealthBar"]
+layout_mode = 0
+offset_right = 376.0
+offset_bottom = 96.0
+texture = ExtResource("4_pbcio")
+expand_mode = 2
+stretch_mode = 4
+metadata/_edit_lock_ = true
+
+[node name="HP" type="Label" parent="HealthBar"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 37.0
+offset_right = 60.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 16
+text = "HP
+"
+metadata/_edit_lock_ = true
+
+[node name="Bar1" type="TextureRect" parent="HealthBar"]
+material = SubResource("ShaderMaterial_xds1v")
+layout_mode = 0
+offset_left = 78.0
+offset_top = 15.0
+offset_right = 161.0
+offset_bottom = 20.0
+scale = Vector2(3, 3)
+texture = ExtResource("6_mks22")
+stretch_mode = 4
+metadata/_edit_lock_ = true
+
+[node name="Bar2" type="TextureRect" parent="HealthBar"]
+material = SubResource("ShaderMaterial_0i1og")
+layout_mode = 0
+offset_left = 93.0
+offset_top = 39.0
+offset_right = 176.0
+offset_bottom = 45.0
+scale = Vector2(3, 3)
+texture = ExtResource("7_oaeot")
+stretch_mode = 4
+metadata/_edit_lock_ = true
+
+[node name="Bar3" type="TextureRect" parent="HealthBar"]
+material = SubResource("ShaderMaterial_yy1jw")
+layout_mode = 0
+offset_left = 78.0
+offset_top = 66.0
+offset_right = 161.0
+offset_bottom = 72.0
+scale = Vector2(3, 3)
+texture = ExtResource("8_luqps")
+stretch_mode = 4
+metadata/_edit_lock_ = true

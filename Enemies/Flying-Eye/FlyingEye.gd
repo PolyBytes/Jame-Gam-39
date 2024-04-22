@@ -6,9 +6,7 @@ extends Enemy
 
 @export var attack_can_hit: bool = false
 var attack_distance: float = 23
-var attack_damage: float = 5
 
-var movement_speed: float = 30
 var too_close_distance: float = 20
 var min_sprite_orientation_distance: float = 0
 var velocity: Vector2 = Vector2.ZERO
@@ -17,14 +15,14 @@ var distance_to_target: float
 
 func _ready():
 	target_player = get_tree().get_first_node_in_group("player")
+	animation_state.travel("idle")
 
 func _process(delta):
-	if not is_alive:
-		if animation_state.get_current_node() != "death":
-			animation_state.travel("death")
-	else:
+	if is_alive:
 		handle_player_targeting(delta)
 		handle_attacking()
+	elif animation_state.get_current_node() != "death":
+		animation_state.travel("death")
 
 func handle_player_targeting(delta: float):
 	if not target_player:

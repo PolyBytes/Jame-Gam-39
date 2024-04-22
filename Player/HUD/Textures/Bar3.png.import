@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://damlnrhn1jbua"
-path="res://.godot/imported/particle.png-0db796aec7bb39c76f750ed499e9615f.ctex"
+uid="uid://x5uad1urdqxv"
+path="res://.godot/imported/Bar3.png-fda19f292bfe8ddab289f55aa48a5567.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/particle.png"
-dest_files=["res://.godot/imported/particle.png-0db796aec7bb39c76f750ed499e9615f.ctex"]
+source_file="res://Player/HUD/Textures/Bar3.png"
+dest_files=["res://.godot/imported/Bar3.png-fda19f292bfe8ddab289f55aa48a5567.ctex"]
 
 [params]
 

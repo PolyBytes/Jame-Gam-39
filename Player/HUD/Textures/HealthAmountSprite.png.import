@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://coo4iejre0yc5"
-path="res://.godot/imported/over.png-43e9c85180d8877b671dc5152c0d6483.ctex"
+uid="uid://bn8qcavg0ng3h"
+path="res://.godot/imported/HealthAmountSprite.png-54a690de8a3e733b65623bd1e83ed666.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/over.png"
-dest_files=["res://.godot/imported/over.png-43e9c85180d8877b671dc5152c0d6483.ctex"]
+source_file="res://Player/HUD/Textures/HealthAmountSprite.png"
+dest_files=["res://.godot/imported/HealthAmountSprite.png-54a690de8a3e733b65623bd1e83ed666.ctex"]
 
 [params]
 
