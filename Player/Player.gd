@@ -2,6 +2,14 @@ class_name Player extends CharacterBody2D
 
 signal health_changed(new_health: int, max_health: int)
 
+@export var SHAKE_STRENGTH: float = 60.0
+@export var SHAKE_DECAY_RATE: float = 5.0
+
+@onready var camera = $Camera2D
+@onready var rand = RandomNumberGenerator.new()
+
+var shake_strength: float = 0.0
+
 const MAX_VELOCITY = 100.0
 const ACCELERATION = 1000.0
 
@@ -25,6 +33,19 @@ func _physics_process(delta):
 	handle_animation_states()
 	handle_attacking()
 	move_and_slide()
+
+func _process(delta: float) -> void:
+	shake_strength = lerp(shake_strength, 0.0, SHAKE_DECAY_RATE * delta)
+	camera.offset = get_random_offset()
+	
+func get_random_offset() -> Vector2:
+	return Vector2(
+		rand.randf_range(-shake_strength, shake_strength),
+		rand.randf_range(-shake_strength, shake_strength)
+	)
+
+func apply_shake() -> void:
+	shake_strength = SHAKE_STRENGTH
 
 func handle_input() -> Vector2:
 	var horizontal_direction: float = Input.get_axis("move_left", "move_right")
@@ -75,6 +96,7 @@ func handle_animation_states():
 	
 	if Input.is_action_just_pressed("attack_primary"):
 		animation_state.travel("attack")
+		apply_shake()
 		return
 
 	if velocity.length() > 0:
