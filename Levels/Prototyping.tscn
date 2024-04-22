@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdlauat43712e"]
+[gd_scene load_steps=3 format=3 uid="uid://cdlauat43712e"]
 
 [ext_resource type="PackedScene" uid="uid://wtvoou0ci41m" path="res://Player/Player.tscn" id="1_wjuan"]
 [ext_resource type="Texture2D" uid="uid://be4c7wpiyxvf1" path="res://icon.svg" id="2_7cvii"]
-[ext_resource type="PackedScene" uid="uid://cs8mxbjjxk1h3" path="res://Enemies/Flying-Eye/FlyingEye.tscn" id="3_xaka4"]
 
 [node name="Prototyping" type="Node2D"]
 
@@ -15,6 +14,3 @@ texture = ExtResource("2_7cvii")
 [node name="Icon2" type="Sprite2D" parent="."]
 position = Vector2(157, -71)
 texture = ExtResource("2_7cvii")
-
-[node name="FlyingEye" parent="." instance=ExtResource("3_xaka4")]
-position = Vector2(40, -67)

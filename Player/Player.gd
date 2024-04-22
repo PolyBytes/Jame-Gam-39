@@ -1,5 +1,7 @@
 class_name Player extends CharacterBody2D
 
+signal health_changed(new_health: int, max_health: int)
+
 const MAX_VELOCITY = 100.0
 const ACCELERATION = 1000.0
 
@@ -7,17 +9,8 @@ const ACCELERATION = 1000.0
 @onready var animation_state = animation_tree.get("parameters/playback")
 
 var is_slain: bool = false
-var is_rolling: bool = false
-
-#func _ready():
-	#$AnimatedSprite2D.play("Idle")
-
-func _process(_delta):
-	if Input.is_action_just_pressed("debug_testing_die"):
-		is_slain = true
-	elif Input.is_action_just_pressed("dodge_roll"):
-		if not is_slain and animation_state.get_current_node() == "roll":
-			is_rolling = true
+var max_health: int = 100
+var health: int = max_health
 
 func _physics_process(delta):
 	var input_vector = Vector2.ZERO
@@ -66,12 +59,15 @@ func handle_animation_states():
 	if is_slain:
 		animation_state.travel("death")
 		return
-	
-	if is_rolling:
-		is_rolling = false
-		animation_state.travel("roll")
 
 	if velocity.length() > 0:
 		animation_state.travel("run")
 	else:
 		animation_state.travel("idle")
+
+func take_damage(damage_amount: int):
+	health = clampi(health - damage_amount, 0, max_health)
+	health_changed.emit(health, max_health)
+	
+	if health == 0:
+		is_slain = true

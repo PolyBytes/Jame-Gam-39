@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Enemies/Flying-Eye/FlyingEye.gd" id="1_osiu1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ye4ix"]
-size = Vector2(25, 25)
+size = Vector2(41, 31)
 
 [sub_resource type="Animation" id="Animation_2cqkv"]
 resource_name = "idle"
@@ -37,6 +37,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [8, 9, 10, 11, 12, 13, 14, 15]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:attack_can_hit")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_3wvkh"]
@@ -101,13 +113,15 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qwtsr"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0j826"]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u7bb0"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5dc8a"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_brq14"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_su5ju"]
+switch_mode = 2
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_6cvl2"]
 states/End/position = Vector2(782, 171)
@@ -120,22 +134,23 @@ states/idle/node = SubResource("AnimationNodeAnimation_hwbct")
 states/idle/position = Vector2(507, 171)
 states/take_damage/node = SubResource("AnimationNodeAnimation_k6jgb")
 states/take_damage/position = Vector2(609, 269)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3165y"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_ndbyi"), "death", "End", SubResource("AnimationNodeStateMachineTransition_4rfbf"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_qwtsr"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_0j826"), "idle", "take_damage", SubResource("AnimationNodeStateMachineTransition_u7bb0"), "take_damage", "idle", SubResource("AnimationNodeStateMachineTransition_5dc8a"), "attack", "take_damage", SubResource("AnimationNodeStateMachineTransition_brq14")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3165y"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_ndbyi"), "death", "End", SubResource("AnimationNodeStateMachineTransition_4rfbf"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_qwtsr"), "idle", "take_damage", SubResource("AnimationNodeStateMachineTransition_u7bb0"), "take_damage", "idle", SubResource("AnimationNodeStateMachineTransition_5dc8a"), "attack", "take_damage", SubResource("AnimationNodeStateMachineTransition_brq14"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_su5ju")]
 
-[node name="FlyingEye" type="CharacterBody2D"]
+[node name="FlyingEye" type="Area2D"]
 z_index = 4
 script = ExtResource("1_osiu1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(5, 1)
+position = Vector2(-2.5, -6.5)
 shape = SubResource("RectangleShape2D_ye4ix")
 metadata/_edit_lock_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-5, -8)
 texture = ExtResource("1_nul23")
 hframes = 8
 vframes = 4
-frame = 6
+frame = 7
 metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -146,3 +161,8 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_6cvl2")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="AttackCooldownTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
