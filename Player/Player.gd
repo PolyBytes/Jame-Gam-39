@@ -8,6 +8,9 @@ const ACCELERATION = 1000.0
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_state = animation_tree.get("parameters/playback")
 
+@export var sword_attack_can_hit: bool = false
+@export var sword_attack_damage: int = 4
+
 var is_slain: bool = false
 var max_health: int = 100
 var health: int = max_health
@@ -20,6 +23,7 @@ func _physics_process(delta):
 	
 	update_velocity(delta, input_vector)
 	handle_animation_states()
+	handle_attacking()
 	move_and_slide()
 
 func handle_input() -> Vector2:
@@ -29,7 +33,12 @@ func handle_input() -> Vector2:
 	
 	if horizontal_direction:
 		# Handle Sprite Horizontal Orientation
-		$Sprite2D.flip_h = true if roundi(horizontal_direction) == -1 else false
+		if roundi(horizontal_direction) == -1:
+			$Sprite2D.flip_h = true
+			%SwordSwingCollisionPolygon.scale.x = -1
+		else:
+			$Sprite2D.flip_h = false
+			%SwordSwingCollisionPolygon.scale.x = 1
 		
 		input_vector.x = horizontal_direction
 
@@ -79,3 +88,15 @@ func take_damage(damage_amount: int):
 	
 	if health == 0:
 		is_slain = true
+
+func handle_attacking():
+	if not sword_attack_can_hit:
+		return
+	
+	for area in %AttackArea2D.get_overlapping_areas():
+		if not area is Enemy:
+			continue
+		
+		area.take_damage(sword_attack_damage)
+	
+	sword_attack_can_hit = false

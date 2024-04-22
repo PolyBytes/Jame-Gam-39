@@ -6,23 +6,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ye4ix"]
 size = Vector2(41, 31)
 
-[sub_resource type="Animation" id="Animation_2cqkv"]
-resource_name = "idle"
-length = 0.8
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
-}
-
 [sub_resource type="Animation" id="Animation_o67j0"]
 resource_name = "attack"
 length = 0.8
@@ -51,22 +34,6 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_3wvkh"]
-resource_name = "take_damage"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [16, 17, 18, 19]
-}
-
 [sub_resource type="Animation" id="Animation_7fpdq"]
 resource_name = "death"
 length = 0.4
@@ -81,6 +48,39 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [24, 25, 26, 27]
+}
+
+[sub_resource type="Animation" id="Animation_2cqkv"]
+resource_name = "idle"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_3wvkh"]
+resource_name = "take_damage"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [16, 17, 18, 19]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wdqqu"]
@@ -108,18 +108,21 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ndbyi"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4rfbf"]
-switch_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qwtsr"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u7bb0"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5dc8a"]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_brq14"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_su5ju"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_py42s"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wfdrb"]
 switch_mode = 2
 advance_mode = 2
 
@@ -134,7 +137,7 @@ states/idle/node = SubResource("AnimationNodeAnimation_hwbct")
 states/idle/position = Vector2(507, 171)
 states/take_damage/node = SubResource("AnimationNodeAnimation_k6jgb")
 states/take_damage/position = Vector2(609, 269)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3165y"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_ndbyi"), "death", "End", SubResource("AnimationNodeStateMachineTransition_4rfbf"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_qwtsr"), "idle", "take_damage", SubResource("AnimationNodeStateMachineTransition_u7bb0"), "take_damage", "idle", SubResource("AnimationNodeStateMachineTransition_5dc8a"), "attack", "take_damage", SubResource("AnimationNodeStateMachineTransition_brq14"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_su5ju")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_3165y"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_ndbyi"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_qwtsr"), "idle", "take_damage", SubResource("AnimationNodeStateMachineTransition_u7bb0"), "attack", "take_damage", SubResource("AnimationNodeStateMachineTransition_brq14"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_su5ju"), "take_damage", "idle", SubResource("AnimationNodeStateMachineTransition_py42s"), "death", "End", SubResource("AnimationNodeStateMachineTransition_wfdrb")]
 
 [node name="FlyingEye" type="Area2D"]
 z_index = 4
@@ -150,7 +153,6 @@ position = Vector2(-5, -8)
 texture = ExtResource("1_nul23")
 hframes = 8
 vframes = 4
-frame = 7
 metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -166,3 +168,5 @@ anim_player = NodePath("../AnimationPlayer")
 wait_time = 3.0
 one_shot = true
 autostart = true
+
+[connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]

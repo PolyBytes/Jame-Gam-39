@@ -19,6 +19,10 @@ func _ready():
 	target_player = get_tree().get_first_node_in_group("player")
 
 func _process(delta):
+	if not is_alive:
+		animation_state.travel("death")
+		set_process(false)
+	
 	handle_player_targeting(delta)
 	handle_attacking()
 
@@ -47,7 +51,7 @@ func handle_player_targeting(delta: float):
 				position -= velocity
 
 func handle_attacking():
-	if distance_to_target > attack_distance:
+	if distance_to_target <= attack_distance:
 		if attack_cooldown.time_left == 0:
 			attack_cooldown.start()
 			animation_state.travel("attack")
@@ -56,3 +60,15 @@ func handle_attacking():
 		if overlaps_body(target_player):
 			target_player.take_damage(attack_damage)
 			attack_can_hit = false
+
+func take_damage(damage_amount: int):
+	if not is_alive:
+		return
+	
+	super(damage_amount)
+	animation_state.travel("take_damage")
+
+func _on_animation_tree_animation_finished(anim_name):
+	if anim_name == "death":
+		await get_tree().create_timer(3).timeout
+		queue_free()
