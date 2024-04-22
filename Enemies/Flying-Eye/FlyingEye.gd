@@ -1,4 +1,4 @@
-extends Area2D
+extends Enemy
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_state = animation_tree.get("parameters/playback")
@@ -13,36 +13,27 @@ var too_close_distance: float = 20
 var min_sprite_orientation_distance: float = 0
 var velocity: Vector2 = Vector2.ZERO
 var target_player: CharacterBody2D
+var distance_to_target: float
 
 func _ready():
 	target_player = get_tree().get_first_node_in_group("player")
 
 func _process(delta):
+	handle_player_targeting(delta)
+	handle_attacking()
+
+func handle_player_targeting(delta: float):
 	if not target_player:
 		return
 	
 	var movement_direction: Vector2 = position.direction_to(target_player.position)
-	var distance_to_target: float = position.distance_to(target_player.position)
+	distance_to_target = position.distance_to(target_player.position)
 	
 	if distance_to_target > min_sprite_orientation_distance:
 		if target_player.is_slain:
 			$Sprite2D.flip_h = false if movement_direction.x < 0 else true
 		else:
 			$Sprite2D.flip_h = true if movement_direction.x < 0 else false
-	
-	#var look_position: Vector2 = target_player.position
-	#
-	#if $Sprite2D.flip_h:
-		#look_position.x = -look_position.x
-	#else:
-		#look_position.x = abs(look_position.x)
-	#
-	#look_at(look_position)
-	
-	if distance_to_target < attack_distance:
-		if attack_cooldown.time_left == 0:
-			attack_cooldown.start()
-			animation_state.travel("attack")
 	
 	if animation_state.get_current_node() == "idle":
 		velocity = movement_direction * movement_speed * delta
@@ -54,6 +45,12 @@ func _process(delta):
 				position += velocity
 			elif distance_to_target < too_close_distance:
 				position -= velocity
+
+func handle_attacking():
+	if distance_to_target > attack_distance:
+		if attack_cooldown.time_left == 0:
+			attack_cooldown.start()
+			animation_state.travel("attack")
 	
 	if attack_can_hit:
 		if overlaps_body(target_player):

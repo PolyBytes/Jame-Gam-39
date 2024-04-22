@@ -50,6 +50,10 @@ func update_velocity(delta: float, input_vector: Vector2):
 	if input_vector.length() == 0:
 		return
 	
+	if animation_state.get_current_node() == "attack":
+		velocity = Vector2.ZERO
+		return
+	
 	velocity = velocity + (input_vector.normalized() * ACCELERATION * delta)
 	
 	if velocity.length() > MAX_VELOCITY:
@@ -58,6 +62,10 @@ func update_velocity(delta: float, input_vector: Vector2):
 func handle_animation_states():
 	if is_slain:
 		animation_state.travel("death")
+		return
+	
+	if Input.is_action_just_pressed("attack_primary"):
+		animation_state.travel("attack")
 		return
 
 	if velocity.length() > 0:

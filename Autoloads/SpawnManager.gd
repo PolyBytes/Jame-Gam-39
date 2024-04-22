@@ -8,7 +8,7 @@ func _ready():
 	spawn_wave()
 
 func spawn_wave():
-	for i in range(5):
+	for i in range(20):
 		var enemy = flying_eye.instantiate()
 		
 		enemy.position.x = randi_range(-200, 200)
