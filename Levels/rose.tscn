@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cruod710u7s31"]
+
+[ext_resource type="Texture2D" uid="uid://wd13irtycv3k" path="res://Levels/rose.png" id="1_vkq7g"]
+
+[sub_resource type="Curve" id="Curve_dnk57"]
+_data = [Vector2(0.0020202, 1), 0.0, 0.0, 0, 0, Vector2(0.993939, 0.00375664), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_8d2fa"]
+colors = PackedColorArray(0.892482, 0, 0.187679, 1, 1, 1, 1, 1)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, 12)
+amount = 50
+emission_shape = 2
+emission_sphere_radius = 8.11
+direction = Vector2(0, -1)
+gravity = Vector2(0, -10)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_dnk57")
+color_ramp = SubResource("Gradient_8d2fa")
+
+[node name="Rose" type="Sprite2D" parent="."]
+texture = ExtResource("1_vkq7g")

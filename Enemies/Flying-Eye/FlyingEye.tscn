@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cs8mxbjjxk1h3"]
+[gd_scene load_steps=24 format=3 uid="uid://cs8mxbjjxk1h3"]
 
 [ext_resource type="Texture2D" uid="uid://dan3xuw06qi5s" path="res://Enemies/Flying-Eye/Flying-Eye-Sprite-Sheet.png" id="1_nul23"]
 [ext_resource type="Script" path="res://Enemies/Flying-Eye/FlyingEye.gd" id="1_osiu1"]
@@ -151,6 +151,10 @@ states/take_damage/position = Vector2(642, 274)
 transitions = ["idle", "death", SubResource("AnimationNodeStateMachineTransition_ndbyi"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_qwtsr"), "idle", "take_damage", SubResource("AnimationNodeStateMachineTransition_u7bb0"), "attack", "take_damage", SubResource("AnimationNodeStateMachineTransition_brq14"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_su5ju"), "take_damage", "idle", SubResource("AnimationNodeStateMachineTransition_py42s"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_rc3v4"), "take_damage", "death", SubResource("AnimationNodeStateMachineTransition_ogt2h"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_rk75s")]
 graph_offset = Vector2(171, 66)
 
+[sub_resource type="Curve" id="Curve_thqqt"]
+_data = [Vector2(0, 0.995117), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="FlyingEye" type="Area2D"]
 z_index = 4
 script = ExtResource("1_osiu1")
@@ -166,6 +170,7 @@ position = Vector2(-5, -8)
 texture = ExtResource("1_nul23")
 hframes = 8
 vframes = 4
+frame = 3
 metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -188,9 +193,13 @@ amount = 60
 one_shot = true
 speed_scale = 4.0
 explosiveness = 1.0
+randomness = 0.5
 spread = 180.0
 gravity = Vector2(0, 0)
 initial_velocity_min = 25.0
 initial_velocity_max = 50.0
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_thqqt")
 
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
