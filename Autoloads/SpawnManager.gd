@@ -7,7 +7,7 @@ var spawn_range: int = 500
 var enemy_count: int = 20
 
 func _ready():
-	scene_root = get_tree().root.get_child(0)
+	scene_root = get_tree().get_first_node_in_group("level")
 	spawn_wave()
 
 func _process(_delta):

@@ -23,6 +23,9 @@ var is_slain: bool = false
 var max_health: int = 100
 var health: int = max_health
 
+func _ready():
+	animation_state.travel("idle")
+
 func _physics_process(delta):
 	var input_vector = Vector2.ZERO
 	

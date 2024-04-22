@@ -142,9 +142,6 @@ animation = &"roll"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t2lif"]
 animation = &"run"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yextu"]
-advance_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fs0wu"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lvwxd"]
@@ -175,6 +172,8 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pv37r"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m2bmw"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_noype"]
 states/End/position = Vector2(606, 100)
 states/Start/position = Vector2(307, 11)
@@ -190,22 +189,22 @@ states/roll/node = SubResource("AnimationNodeAnimation_s2fhv")
 states/roll/position = Vector2(411, 207)
 states/run/node = SubResource("AnimationNodeAnimation_t2lif")
 states/run/position = Vector2(207, 207)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_yextu"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_fs0wu"), "idle", "roll", SubResource("AnimationNodeStateMachineTransition_lvwxd"), "idle", "block", SubResource("AnimationNodeStateMachineTransition_uxqs2"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_lo6dv"), "death", "End", SubResource("AnimationNodeStateMachineTransition_ngpva"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_u0adj"), "block", "idle", SubResource("AnimationNodeStateMachineTransition_84h0b"), "roll", "idle", SubResource("AnimationNodeStateMachineTransition_fe1ex"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_q6mlm"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_bmw5a"), "attack", "run", SubResource("AnimationNodeStateMachineTransition_i3u0f"), "run", "attack", SubResource("AnimationNodeStateMachineTransition_pv37r")]
+transitions = ["idle", "run", SubResource("AnimationNodeStateMachineTransition_fs0wu"), "idle", "roll", SubResource("AnimationNodeStateMachineTransition_lvwxd"), "idle", "block", SubResource("AnimationNodeStateMachineTransition_uxqs2"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_lo6dv"), "death", "End", SubResource("AnimationNodeStateMachineTransition_ngpva"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_u0adj"), "block", "idle", SubResource("AnimationNodeStateMachineTransition_84h0b"), "roll", "idle", SubResource("AnimationNodeStateMachineTransition_fe1ex"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_q6mlm"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_bmw5a"), "attack", "run", SubResource("AnimationNodeStateMachineTransition_i3u0f"), "run", "attack", SubResource("AnimationNodeStateMachineTransition_pv37r"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_m2bmw")]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o4jsr"]
 size = Vector2(11, 23)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-z_index = 1
 script = ExtResource("1_ojtx6")
 SHAKE_STRENGTH = 1.0
+sword_attack_can_hit = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-2, 3)
 texture = ExtResource("2_p5cep")
 hframes = 15
 vframes = 6
-frame = 4
+frame = 76
 metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -221,6 +220,10 @@ anim_player = NodePath("../AnimationPlayer")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+limit_left = -416
+limit_top = -400
+limit_right = 1616
+limit_bottom = 1024
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -233,7 +236,7 @@ unique_name_in_owner = true
 
 [node name="SwordSwingCollisionPolygon" type="CollisionPolygon2D" parent="AttackArea2D"]
 unique_name_in_owner = true
-polygon = PackedVector2Array(-19, -12, -6, -18, 11, -18, 23, -13, 29, -4, 29, 5, 25, 10, 17, 10, 6, 7, 4, -3, -3, -9, -9, -11)
+polygon = PackedVector2Array(14, -17, 21, -15, 26, -10, 29, -4, 29, 5, 25, 10, 17, 10, 6, 7, 5, -10)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
