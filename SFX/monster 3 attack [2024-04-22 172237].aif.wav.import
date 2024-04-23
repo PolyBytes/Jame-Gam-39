@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bgw1evt60vyuu"
+path="res://.godot/imported/monster 3 attack [2024-04-22 172237].aif.wav-bd7aa3fc0c7c5cc5eddd9a133a994b98.sample"
+
+[deps]
+
+source_file="res://SFX/monster 3 attack [2024-04-22 172237].aif.wav"
+dest_files=["res://.godot/imported/monster 3 attack [2024-04-22 172237].aif.wav-bd7aa3fc0c7c5cc5eddd9a133a994b98.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

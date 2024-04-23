@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://do04qpbsh7h6k"
+path="res://.godot/imported/menu click positive [2024-04-22 172207].aif.wav-f233ea4ac1ee0d839a38edc248b06f98.sample"
+
+[deps]
+
+source_file="res://SFX/menu click positive [2024-04-22 172207].aif.wav"
+dest_files=["res://.godot/imported/menu click positive [2024-04-22 172207].aif.wav-f233ea4ac1ee0d839a38edc248b06f98.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

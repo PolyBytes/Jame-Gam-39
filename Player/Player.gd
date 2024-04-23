@@ -100,9 +100,11 @@ func handle_animation_states():
 		return
 	
 	if Input.is_action_just_pressed("attack_primary"):
-		animation_state.travel("attack")
-		apply_shake()
-		return
+		if animation_state.get_current_node() != "attack":
+			animation_state.travel("attack")
+			apply_shake()
+			$SwordSwing.play()
+			return
 
 	if velocity.length() > 0:
 		animation_state.travel("run")
@@ -121,10 +123,16 @@ func handle_attacking():
 	if not sword_attack_can_hit:
 		return
 	
-	for area in %AttackArea2D.get_overlapping_areas():
-		if not area is Enemy:
+	var hit_registered: bool = false
+	
+	for enemy in %AttackArea2D.get_overlapping_areas():
+		if not enemy is Enemy:
 			continue
 		
-		area.take_damage(sword_attack_damage)
+		if not hit_registered and enemy.is_alive:
+			hit_registered = true
+			$SwordHit.play()
+		
+		enemy.take_damage(sword_attack_damage)
 	
 	sword_attack_can_hit = false

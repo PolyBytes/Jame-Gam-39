@@ -1,8 +1,11 @@
-[gd_scene load_steps=32 format=3 uid="uid://wtvoou0ci41m"]
+[gd_scene load_steps=35 format=3 uid="uid://wtvoou0ci41m"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_ojtx6"]
 [ext_resource type="PackedScene" uid="uid://b3kfblmkpt121" path="res://Player/HUD/HUD.tscn" id="2_b6hyq"]
 [ext_resource type="Texture2D" uid="uid://d3k7sj3qdya0p" path="res://Player/Player-Sprite-Sheet.png" id="2_p5cep"]
+[ext_resource type="Texture2D" uid="uid://byw4203c2tjp5" path="res://Player/light_texture.webp" id="4_ufg48"]
+[ext_resource type="AudioStream" uid="uid://byiy7woaqq1k" path="res://SFX/char sword hit [2024-04-22 172210].aif.wav" id="5_k1082"]
+[ext_resource type="AudioStream" uid="uid://bostmyaavtorx" path="res://SFX/char sword swing [2024-04-22 172208].aif.wav" id="6_sxj55"]
 
 [sub_resource type="Animation" id="Animation_ndr3j"]
 resource_name = "attack"
@@ -238,10 +241,21 @@ collision_mask = 4
 
 [node name="SwordSwingCollisionPolygon" type="CollisionPolygon2D" parent="AttackArea2D"]
 unique_name_in_owner = true
-polygon = PackedVector2Array(14, -17, 21, -15, 26, -10, 29, -4, 29, 5, 25, 10, 17, 10, 6, 7, 5, -10)
+polygon = PackedVector2Array(14, -18, 24, -17, 29, -12, 32, -3, 32, 9, 25, 14, 16, 13, 6, 7, 5, -10)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("2_b6hyq")]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+texture = ExtResource("4_ufg48")
+texture_scale = 2.0
+
+[node name="SwordHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_k1082")
+volume_db = -20.0
+
+[node name="SwordSwing" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_sxj55")
 
 [connection signal="health_changed" from="." to="CanvasLayer/Hud" method="_on_player_health_changed"]

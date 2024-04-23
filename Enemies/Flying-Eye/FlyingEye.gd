@@ -32,3 +32,4 @@ func take_damage(damage_amount: int):
 	
 	super(damage_amount)
 	stunned.emit()
+	$TakeDamage.play_random_sound()

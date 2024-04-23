@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b4t6me6y3ften"
+path="res://.godot/imported/haste rose pickup [2024-04-23 143601].aif.wav-ed8bbfee764c71b46d0dfc3a3ec8afcd.sample"
+
+[deps]
+
+source_file="res://SFX/haste rose pickup [2024-04-23 143601].aif.wav"
+dest_files=["res://.godot/imported/haste rose pickup [2024-04-23 143601].aif.wav-ed8bbfee764c71b46d0dfc3a3ec8afcd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dfjbupdwoglh0"
+path="res://.godot/imported/char stone surface walk loop [2024-04-22 172215].aif.wav-9656f91bcaa06d49b8af0c65ab877018.sample"
+
+[deps]
+
+source_file="res://SFX/char stone surface walk loop [2024-04-22 172215].aif.wav"
+dest_files=["res://.godot/imported/char stone surface walk loop [2024-04-22 172215].aif.wav-9656f91bcaa06d49b8af0c65ab877018.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

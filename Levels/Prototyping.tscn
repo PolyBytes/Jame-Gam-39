@@ -35,3 +35,6 @@ layer_0/tile_data = PackedInt32Array(-1572890, 65536, 1, -1507354, 0, 0, -144181
 metadata/_edit_lock_ = true
 
 [node name="Rose" parent="." instance=ExtResource("4_ke5eo")]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.0605303, 0.0605303, 0.0605303, 1)

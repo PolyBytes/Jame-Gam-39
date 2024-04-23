@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cs8mxbjjxk1h3"]
+[gd_scene load_steps=34 format=3 uid="uid://cs8mxbjjxk1h3"]
 
 [ext_resource type="Texture2D" uid="uid://dan3xuw06qi5s" path="res://Enemies/Flying-Eye/Flying-Eye-Sprite-Sheet.png" id="1_nul23"]
 [ext_resource type="Script" path="res://Enemies/Flying-Eye/FlyingEye.gd" id="1_osiu1"]
@@ -8,6 +8,10 @@
 [ext_resource type="Script" path="res://Enemies/Flying-Eye/States/FlyingEyeFlankState.gd" id="5_lt3hy"]
 [ext_resource type="Script" path="res://Enemies/Flying-Eye/States/FlyingEyeStunnedState.gd" id="7_2puiu"]
 [ext_resource type="Script" path="res://Enemies/Flying-Eye/States/FlyingEyeSlainState.gd" id="8_wtswa"]
+[ext_resource type="Script" path="res://Enemies/Flying-Eye/FlyingEyeTakeDamage.gd" id="9_0f7da"]
+[ext_resource type="AudioStream" uid="uid://c45hdi8al1v64" path="res://SFX/monster 2 hit var1 [2024-04-22 172225].aif.wav" id="10_nycxa"]
+[ext_resource type="AudioStream" uid="uid://du33m32twflfq" path="res://SFX/monster 2 hit var2 [2024-04-22 172225].aif.wav" id="11_roiuf"]
+[ext_resource type="AudioStream" uid="uid://cqthnndr7ehhf" path="res://SFX/monster 2 hit var3 [2024-04-22 172228].aif.wav" id="12_fi4ad"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ye4ix"]
 size = Vector2(41, 31)
@@ -226,6 +230,13 @@ enemy_state_machine = NodePath("..")
 [node name="FlyingEyeSlainState" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy_state_machine")]
 script = ExtResource("8_wtswa")
 enemy_state_machine = NodePath("..")
+
+[node name="TakeDamage" type="AudioStreamPlayer2D" parent="."]
+volume_db = -20.0
+script = ExtResource("9_0f7da")
+sound_1 = ExtResource("10_nycxa")
+sound_2 = ExtResource("11_roiuf")
+sound_3 = ExtResource("12_fi4ad")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="state_changed" from="EnemyStateMachine" to="." method="_on_enemy_state_machine_state_changed"]

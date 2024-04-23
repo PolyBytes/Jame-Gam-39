@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://djs1hi0enc250"
+path="res://.godot/imported/fire rose pickup [2024-04-23 143557].aif.wav-dd56c63e1fac73961fe78c45ef6f5ecd.sample"
+
+[deps]
+
+source_file="res://SFX/fire rose pickup [2024-04-23 143557].aif.wav"
+dest_files=["res://.godot/imported/fire rose pickup [2024-04-23 143557].aif.wav-dd56c63e1fac73961fe78c45ef6f5ecd.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

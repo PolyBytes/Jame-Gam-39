@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d34dse0e2qjey"
+path="res://.godot/imported/char hit var2 [2024-04-22 172211].aif.wav-4d9789c496404a3d5cec06b18c69f095.sample"
+
+[deps]
+
+source_file="res://SFX/char hit var2 [2024-04-22 172211].aif.wav"
+dest_files=["res://.godot/imported/char hit var2 [2024-04-22 172211].aif.wav-4d9789c496404a3d5cec06b18c69f095.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

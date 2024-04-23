@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dlfghcg1g5fb"
+path="res://.godot/imported/monster 3 death [2024-04-22 172235].aif.wav-623c888c479f6a58bd447f6f2c458c56.sample"
+
+[deps]
+
+source_file="res://SFX/monster 3 death [2024-04-22 172235].aif.wav"
+dest_files=["res://.godot/imported/monster 3 death [2024-04-22 172235].aif.wav-623c888c479f6a58bd447f6f2c458c56.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://du33m32twflfq"
+path="res://.godot/imported/monster 2 hit var2 [2024-04-22 172225].aif.wav-521d1498d947a93c646376cc8a8fbca5.sample"
+
+[deps]
+
+source_file="res://SFX/monster 2 hit var2 [2024-04-22 172225].aif.wav"
+dest_files=["res://.godot/imported/monster 2 hit var2 [2024-04-22 172225].aif.wav-521d1498d947a93c646376cc8a8fbca5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

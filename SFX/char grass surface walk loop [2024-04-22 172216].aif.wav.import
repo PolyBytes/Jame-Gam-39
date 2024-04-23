@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://e7ej1c57hn0f"
+path="res://.godot/imported/char grass surface walk loop [2024-04-22 172216].aif.wav-f31ac9895df71c20963edc468feb09da.sample"
+
+[deps]
+
+source_file="res://SFX/char grass surface walk loop [2024-04-22 172216].aif.wav"
+dest_files=["res://.godot/imported/char grass surface walk loop [2024-04-22 172216].aif.wav-f31ac9895df71c20963edc468feb09da.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

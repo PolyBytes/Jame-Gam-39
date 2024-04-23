@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://yarlpn8pcyio"
+path="res://.godot/imported/haste rose glitter loop [2024-04-23 143603].aif.wav-1f73b70d3719d42c95a8174cf7b13e66.sample"
+
+[deps]
+
+source_file="res://SFX/haste rose glitter loop [2024-04-23 143603].aif.wav"
+dest_files=["res://.godot/imported/haste rose glitter loop [2024-04-23 143603].aif.wav-1f73b70d3719d42c95a8174cf7b13e66.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

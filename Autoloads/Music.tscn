@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwgynwt7jhry3"]
+
+[ext_resource type="AudioStream" uid="uid://cyrqx5t6ptqnb" path="res://Music/OST 23-04-2024.wav" id="1_cbct4"]
+
+[node name="Music" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_cbct4")
+volume_db = -10.0
+autoplay = true

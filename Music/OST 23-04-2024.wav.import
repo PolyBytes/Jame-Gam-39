@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cyrqx5t6ptqnb"
+path="res://.godot/imported/OST 23-04-2024.wav-d37de721a74b96faaa2687f4319a70ab.sample"
+
+[deps]
+
+source_file="res://Music/OST 23-04-2024.wav"
+dest_files=["res://.godot/imported/OST 23-04-2024.wav-d37de721a74b96faaa2687f4319a70ab.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
