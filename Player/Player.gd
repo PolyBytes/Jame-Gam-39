@@ -24,6 +24,8 @@ var max_health: int = 100
 var health: int = max_health
 
 func _ready():
+	collision_layer = 0
+	set_collision_layer_value(2, true)
 	animation_state.travel("idle")
 
 func _physics_process(delta):
