@@ -14,6 +14,7 @@ class_name FlyingEyeFlankState extends FlankState
 @export var attack_cooldown_max_random_offset: float = 5
 
 var attack_cooldown_default_wait_time: float
+var random_flank_direction: int
 
 func _ready():
 	super()
@@ -29,6 +30,8 @@ func enter_state():
 		attack_cooldown_timer.start(attack_cooldown_timer.time_left)
 	else:
 		attack_cooldown_timer.start(attack_cooldown_default_wait_time + randf_range(0, attack_cooldown_max_random_offset))
+	
+	random_flank_direction = 1 if randi_range(0, 1) == 1 else -1
 
 func physics_process_state(delta: float) -> EnemyState:
 	super(delta)
@@ -41,7 +44,7 @@ func physics_process_state(delta: float) -> EnemyState:
 		
 	var target_vector = parent_enemy.position.direction_to(target_player.position)
 	parent_enemy.look_direction = sign(target_vector.x)
-	target_vector = target_vector.rotated(deg_to_rad(90))
+	target_vector = target_vector.rotated(random_flank_direction * deg_to_rad(90))
 	parent_enemy.velocity += target_vector * acceleration * delta
 	
 	if parent_enemy.velocity.length() > max_velocity:
