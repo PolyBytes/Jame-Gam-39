@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cs8mxbjjxk1h3"]
+[gd_scene load_steps=30 format=3 uid="uid://cs8mxbjjxk1h3"]
 
 [ext_resource type="Texture2D" uid="uid://dan3xuw06qi5s" path="res://Enemies/Flying-Eye/Flying-Eye-Sprite-Sheet.png" id="1_nul23"]
 [ext_resource type="Script" path="res://Enemies/Flying-Eye/FlyingEye.gd" id="1_osiu1"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://Enemies/Flying-Eye/States/FlyingEyeFollowState.gd" id="4_eprum"]
 [ext_resource type="Script" path="res://Enemies/Flying-Eye/States/FlyingEyeAttackState.gd" id="5_hi02m"]
 [ext_resource type="Script" path="res://Enemies/Flying-Eye/States/FlyingEyeFlankState.gd" id="5_lt3hy"]
+[ext_resource type="Script" path="res://Enemies/Flying-Eye/States/FlyingEyeStunnedState.gd" id="7_2puiu"]
+[ext_resource type="Script" path="res://Enemies/Flying-Eye/States/FlyingEyeSlainState.gd" id="8_wtswa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ye4ix"]
 size = Vector2(41, 31)
@@ -121,11 +123,12 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rc3v4"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ogt2h"]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rk75s"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4kih3"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_56i0s"]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_6cvl2"]
 states/End/position = Vector2(782, 171)
@@ -138,7 +141,7 @@ states/idle/node = SubResource("AnimationNodeAnimation_hwbct")
 states/idle/position = Vector2(507, 171)
 states/take_damage/node = SubResource("AnimationNodeAnimation_k6jgb")
 states/take_damage/position = Vector2(642, 274)
-transitions = ["idle", "death", SubResource("AnimationNodeStateMachineTransition_ndbyi"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_qwtsr"), "idle", "take_damage", SubResource("AnimationNodeStateMachineTransition_u7bb0"), "attack", "take_damage", SubResource("AnimationNodeStateMachineTransition_brq14"), "take_damage", "idle", SubResource("AnimationNodeStateMachineTransition_py42s"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_rc3v4"), "take_damage", "death", SubResource("AnimationNodeStateMachineTransition_ogt2h"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_rk75s"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_4kih3")]
+transitions = ["idle", "death", SubResource("AnimationNodeStateMachineTransition_ndbyi"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_qwtsr"), "idle", "take_damage", SubResource("AnimationNodeStateMachineTransition_u7bb0"), "attack", "take_damage", SubResource("AnimationNodeStateMachineTransition_brq14"), "take_damage", "idle", SubResource("AnimationNodeStateMachineTransition_py42s"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_rc3v4"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_rk75s"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_4kih3"), "take_damage", "death", SubResource("AnimationNodeStateMachineTransition_56i0s")]
 graph_offset = Vector2(171, 66)
 
 [sub_resource type="Curve" id="Curve_thqqt"]
@@ -194,21 +197,34 @@ script = ExtResource("3_kpwmy")
 parent_enemy = NodePath("..")
 initial_state = NodePath("FlyingEyeFollowState")
 
-[node name="FlyingEyeFollowState" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("flank_state", "enemy_state_machine")]
+[node name="FlyingEyeFollowState" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("flank_state", "stunned_state", "enemy_state_machine")]
 script = ExtResource("4_eprum")
 flank_state = NodePath("../FlyingEyeFlankState")
+stunned_state = NodePath("../FlyingEyeStunnedState")
 enemy_state_machine = NodePath("..")
 
-[node name="FlyingEyeFlankState" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("attack_state", "follow_state", "attack_cooldown_timer", "enemy_state_machine")]
+[node name="FlyingEyeFlankState" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("attack_state", "follow_state", "stunned_state", "attack_cooldown_timer", "enemy_state_machine")]
 script = ExtResource("5_lt3hy")
 attack_state = NodePath("../FlyingEyeAttackState")
 follow_state = NodePath("../FlyingEyeFollowState")
+stunned_state = NodePath("../FlyingEyeStunnedState")
 attack_cooldown_timer = NodePath("../../AttackCooldownTimer")
 enemy_state_machine = NodePath("..")
 
-[node name="FlyingEyeAttackState" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("follow_state", "enemy_state_machine")]
+[node name="FlyingEyeAttackState" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("follow_state", "stunned_state", "enemy_state_machine")]
 script = ExtResource("5_hi02m")
 follow_state = NodePath("../FlyingEyeFollowState")
+stunned_state = NodePath("../FlyingEyeStunnedState")
+enemy_state_machine = NodePath("..")
+
+[node name="FlyingEyeStunnedState" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("follow_state", "slain_state", "enemy_state_machine")]
+script = ExtResource("7_2puiu")
+follow_state = NodePath("../FlyingEyeFollowState")
+slain_state = NodePath("../FlyingEyeSlainState")
+enemy_state_machine = NodePath("..")
+
+[node name="FlyingEyeSlainState" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy_state_machine")]
+script = ExtResource("8_wtswa")
 enemy_state_machine = NodePath("..")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

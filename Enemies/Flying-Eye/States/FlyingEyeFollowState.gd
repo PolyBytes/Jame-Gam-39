@@ -2,28 +2,37 @@ class_name FlyingEyeFollowState extends FollowState
 
 @export_group("Transitionable States")
 @export var flank_state: FlyingEyeFlankState
+@export var stunned_state: FlyingEyeStunnedState
 
 @export_group("State Properties")
 @export var acceleration: float = 150
 @export var max_velocity: float = 100
-@export var max_flank_distance: float = 65
+@export var max_flank_distance: float = 50
 @export var min_flank_distance: float = 40
-@export var flank_random_offset_range: float = 20
+@export var flank_random_offset_range: float = 5
 @export var max_velocity_random_offset_range: float = 50
 
 var flank_random_offset: float
 var max_velocity_random_offset: float
+var stunned: bool = false
 
 func _ready():
 	super()
 	assert(flank_state, "Flank State must be set.")
+	assert(stunned_state, "Stunned State must be set.")
 
 func enter_state():
+	super()
+	stunned = false
+	
 	flank_random_offset = randf_range(-flank_random_offset_range, flank_random_offset_range)
 	max_velocity_random_offset = randf_range(-max_velocity_random_offset_range, max_velocity_random_offset_range)
 
 func physics_process_state(delta: float) -> EnemyState:
 	super(delta)
+	
+	if stunned:
+		return stunned_state
 	
 	var parent_enemy = enemy_state_machine.parent_enemy
 	var target_player = enemy_state_machine.parent_enemy.target_player
@@ -31,6 +40,9 @@ func physics_process_state(delta: float) -> EnemyState:
 	if not target_player or not parent_enemy:
 		return null
 		
+	if not parent_enemy.stunned.is_connected(_parent_enemy_stunned):
+		parent_enemy.stunned.connect(_parent_enemy_stunned)
+	
 	var target_vector = parent_enemy.position.direction_to(target_player.position)
 	parent_enemy.look_direction = sign(target_vector.x)
 	parent_enemy.velocity += target_vector * acceleration * delta
@@ -48,3 +60,6 @@ func physics_process_state(delta: float) -> EnemyState:
 		return flank_state
 	
 	return null
+
+func _parent_enemy_stunned():
+	stunned = true

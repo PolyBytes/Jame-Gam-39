@@ -3,28 +3,33 @@ class_name FlyingEyeFlankState extends FlankState
 @export_group("Transitionable States")
 @export var attack_state: FlyingEyeAttackState
 @export var follow_state: FlyingEyeFollowState
+@export var stunned_state: FlyingEyeStunnedState
 
 @export_group("Required Nodes")
 @export var attack_cooldown_timer: Timer
 
 @export_group("State Properties")
 @export var acceleration: float = 150
-@export var max_velocity: float = 50
-@export var too_far_distance: float = 135
+@export var max_velocity: float = 40
+@export var too_far_distance: float = 100
 @export var attack_cooldown_max_random_offset: float = 5
 
 var attack_cooldown_default_wait_time: float
 var random_flank_direction: int
+var stunned: bool = false
 
 func _ready():
 	super()
 	assert(attack_state, "Attack State must be set.")
+	assert(follow_state, "Follow State must be set.")
+	assert(stunned_state, "Stunned State must be set.")
 	assert(attack_cooldown_timer, "Attack Cooldown Timer must be set.")
 	
 	attack_cooldown_default_wait_time = attack_cooldown_timer.wait_time
 
 func enter_state():
 	super()
+	stunned = false
 	
 	if attack_cooldown_timer.time_left > 0:
 		attack_cooldown_timer.start(attack_cooldown_timer.time_left)
@@ -36,12 +41,18 @@ func enter_state():
 func physics_process_state(delta: float) -> EnemyState:
 	super(delta)
 	
+	if stunned:
+		return stunned_state
+	
 	var parent_enemy = enemy_state_machine.parent_enemy
 	var target_player = enemy_state_machine.parent_enemy.target_player
 	
 	if not target_player or not parent_enemy:
 		return null
-		
+	
+	if not parent_enemy.stunned.is_connected(_parent_enemy_stunned):
+		parent_enemy.stunned.connect(_parent_enemy_stunned)
+	
 	var target_vector = parent_enemy.position.direction_to(target_player.position)
 	parent_enemy.look_direction = sign(target_vector.x)
 	target_vector = target_vector.rotated(random_flank_direction * deg_to_rad(90))
@@ -64,3 +75,6 @@ func physics_process_state(delta: float) -> EnemyState:
 
 func leave_state():
 	attack_cooldown_timer.stop()
+
+func _parent_enemy_stunned():
+	stunned = true

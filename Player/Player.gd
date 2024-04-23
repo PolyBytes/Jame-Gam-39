@@ -112,6 +112,7 @@ func handle_animation_states():
 func take_damage(damage_amount: int):
 	health = clampi(health - damage_amount, 0, max_health)
 	health_changed.emit(health, max_health)
+	apply_shake()
 	
 	if health == 0:
 		is_slain = true
