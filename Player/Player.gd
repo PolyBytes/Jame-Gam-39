@@ -18,6 +18,7 @@ const ACCELERATION = 1000.0
 @export var sword_attack_damage: int = 4
 
 @export_category("Power Up Properties")
+@export var health_sacrifice_per_rose: int = 15
 @export var vision_rose_vision_increase_multiplier: float = 2.5
 @export var vision_rose_vision_change_time_seconds: float = 2
 
@@ -155,6 +156,7 @@ func handle_attacking():
 	sword_attack_can_hit = false
 
 func _on_vision_rose_picked_up():
+	take_damage(health_sacrifice_per_rose)
 	%VisionRosePickedUp.play()
 	%VisionRosePowerUpTimer.start()
 	
@@ -164,3 +166,10 @@ func _on_vision_rose_picked_up():
 func _on_vision_rose_power_up_timer_timeout():
 	var vision_tween = get_tree().create_tween()
 	vision_tween.tween_property(%Vision, "texture_scale", 1, vision_rose_vision_change_time_seconds)
+
+func _on_haste_rose_picked_up():
+	take_damage(health_sacrifice_per_rose)
+	
+
+func _on_haste_rose_power_up_timer_timeout():
+	pass # Replace with function body.
