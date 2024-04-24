@@ -15,6 +15,7 @@ colors = PackedColorArray(0, 1, 1, 1, 1, 1, 1, 1)
 size = Vector2(21, 27)
 
 [node name="HasteRose" type="Area2D"]
+collision_mask = 2
 script = ExtResource("1_k7ybg")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
@@ -42,3 +43,5 @@ stream = ExtResource("2_j2t0n")
 volume_db = -15.0
 autoplay = true
 max_distance = 500.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

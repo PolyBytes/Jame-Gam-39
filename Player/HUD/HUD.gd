@@ -7,6 +7,7 @@ extends Control
 
 @export_group("Power Bar Timers")
 @export var vision_rose_timer: Timer
+@export var haste_rose_timer: Timer
 
 var target_health_percentage: float = 1
 var current_health_percentage: float = 1
@@ -14,6 +15,7 @@ var health_lerp_speed: float = 2
 
 func _ready():
 	assert(vision_rose_timer, "Vision Rose Timer must be set.")
+	assert(haste_rose_timer, "Haste Rose Timer must be set.")
 	
 	%HealthBauble.material.set_shader_parameter("fill_per", current_health_percentage)
 	_on_player_score_changed(0)
@@ -25,6 +27,9 @@ func _process(delta):
 	
 	if vision_rose_timer.time_left > 0:
 		%VisionRosePowerBar.material.set_shader_parameter("percentage", (vision_rose_timer.time_left / vision_rose_timer.wait_time))
+	
+	if haste_rose_timer.time_left > 0:
+		%HasteRosePowerBar.material.set_shader_parameter("percentage", (haste_rose_timer.time_left / haste_rose_timer.wait_time))
 
 func _on_player_health_changed(new_health, max_health):
 	target_health_percentage = new_health as float / max_health

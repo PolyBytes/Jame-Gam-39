@@ -113,7 +113,8 @@ texture = ExtResource("7_oaeot")
 stretch_mode = 4
 metadata/_edit_lock_ = true
 
-[node name="Bar3" type="TextureRect" parent="HealthBar"]
+[node name="HasteRosePowerBar" type="TextureRect" parent="HealthBar"]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_yy1jw")
 layout_mode = 0
 offset_left = 78.0

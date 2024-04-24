@@ -1,12 +1,15 @@
-[gd_scene load_steps=37 format=3 uid="uid://wtvoou0ci41m"]
+[gd_scene load_steps=46 format=3 uid="uid://wtvoou0ci41m"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_ojtx6"]
 [ext_resource type="PackedScene" uid="uid://b3kfblmkpt121" path="res://Player/HUD/HUD.tscn" id="2_b6hyq"]
 [ext_resource type="Texture2D" uid="uid://d3k7sj3qdya0p" path="res://Player/Player-Sprite-Sheet.png" id="2_p5cep"]
+[ext_resource type="PackedScene" uid="uid://ckwt86qe70hso" path="res://Player/FireballShield/FireballShield.tscn" id="4_6gxod"]
 [ext_resource type="Texture2D" uid="uid://byw4203c2tjp5" path="res://Player/light_texture.webp" id="4_ufg48"]
+[ext_resource type="Texture2D" uid="uid://727fk6ngiwme" path="res://Player/HUD/Textures/shield of fire.png" id="4_y6l55"]
 [ext_resource type="AudioStream" uid="uid://byiy7woaqq1k" path="res://SFX/char sword hit [2024-04-22 172210].aif.wav" id="5_k1082"]
 [ext_resource type="AudioStream" uid="uid://bostmyaavtorx" path="res://SFX/char sword swing [2024-04-22 172208].aif.wav" id="6_sxj55"]
 [ext_resource type="AudioStream" uid="uid://cqfhxykeoj2wu" path="res://SFX/vision rose pickup [2024-04-23 143606].aif.wav" id="7_t1pb3"]
+[ext_resource type="AudioStream" uid="uid://b4t6me6y3ften" path="res://SFX/haste rose pickup [2024-04-23 143601].aif.wav" id="8_f0sj0"]
 [ext_resource type="AudioStream" uid="uid://b85ep0ejf6pcx" path="res://SFX/point 24-04-2024.wav" id="8_tfhen"]
 
 [sub_resource type="Animation" id="Animation_ndr3j"]
@@ -129,8 +132,19 @@ _data = {
 "run": SubResource("Animation_g5cwd")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1qsdn"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jqv76"]
 animation = &"attack"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_x5lib"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_2482f"]
+graph_offset = Vector2(-381.997, -0.682129)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_jqv76")
+nodes/Animation/position = Vector2(-216, 170)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_x5lib")
+nodes/TimeScale/position = Vector2(4, 141)
+nodes/output/position = Vector2(206, 149)
+node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_puirw"]
 animation = &"block"
@@ -144,10 +158,19 @@ animation = &"idle"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_s2fhv"]
 animation = &"roll"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t2lif"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nr32v"]
 animation = &"run"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fs0wu"]
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_pnqjn"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_gfj1a"]
+graph_offset = Vector2(-176.104, -3.44273)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_nr32v")
+nodes/Animation/position = Vector2(-99.1141, 141.413)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_pnqjn")
+nodes/TimeScale/position = Vector2(101.086, 112.813)
+nodes/output/position = Vector2(286.8, 121.4)
+node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lvwxd"]
 
@@ -158,8 +181,6 @@ animation = &"run"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ngpva"]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u0adj"]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_84h0b"]
 switch_mode = 2
 
@@ -167,23 +188,27 @@ switch_mode = 2
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q6mlm"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bmw5a"]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i3u0f"]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_pv37r"]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m2bmw"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nlarv"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dd1v5"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ordn2"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bqdyo"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m3mbg"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rur5a"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_noype"]
 states/End/position = Vector2(606, 100)
-states/Start/position = Vector2(307, 11)
-states/attack/node = SubResource("AnimationNodeAnimation_1qsdn")
-states/attack/position = Vector2(207, 64)
+states/Start/position = Vector2(411, 0)
+states/attack/node = SubResource("AnimationNodeBlendTree_2482f")
+states/attack/position = Vector2(207, 8)
 states/block/node = SubResource("AnimationNodeAnimation_puirw")
 states/block/position = Vector2(307, 245)
 states/death/node = SubResource("AnimationNodeAnimation_cprqd")
@@ -192,12 +217,35 @@ states/idle/node = SubResource("AnimationNodeAnimation_mg84u")
 states/idle/position = Vector2(307, 100)
 states/roll/node = SubResource("AnimationNodeAnimation_s2fhv")
 states/roll/position = Vector2(411, 207)
-states/run/node = SubResource("AnimationNodeAnimation_t2lif")
-states/run/position = Vector2(207, 207)
-transitions = ["idle", "run", SubResource("AnimationNodeStateMachineTransition_fs0wu"), "idle", "roll", SubResource("AnimationNodeStateMachineTransition_lvwxd"), "idle", "block", SubResource("AnimationNodeStateMachineTransition_uxqs2"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_lo6dv"), "death", "End", SubResource("AnimationNodeStateMachineTransition_ngpva"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_u0adj"), "block", "idle", SubResource("AnimationNodeStateMachineTransition_84h0b"), "roll", "idle", SubResource("AnimationNodeStateMachineTransition_fe1ex"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_q6mlm"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_bmw5a"), "attack", "run", SubResource("AnimationNodeStateMachineTransition_i3u0f"), "run", "attack", SubResource("AnimationNodeStateMachineTransition_pv37r"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_m2bmw")]
+states/run/node = SubResource("AnimationNodeBlendTree_gfj1a")
+states/run/position = Vector2(207, 196)
+transitions = ["idle", "roll", SubResource("AnimationNodeStateMachineTransition_lvwxd"), "idle", "block", SubResource("AnimationNodeStateMachineTransition_uxqs2"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_lo6dv"), "death", "End", SubResource("AnimationNodeStateMachineTransition_ngpva"), "block", "idle", SubResource("AnimationNodeStateMachineTransition_84h0b"), "roll", "idle", SubResource("AnimationNodeStateMachineTransition_fe1ex"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_m2bmw"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_nlarv"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_dd1v5"), "attack", "run", SubResource("AnimationNodeStateMachineTransition_ordn2"), "run", "attack", SubResource("AnimationNodeStateMachineTransition_bqdyo"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_m3mbg"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_rur5a")]
+graph_offset = Vector2(-83, -4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o4jsr"]
 size = Vector2(11, 23)
+
+[sub_resource type="Animation" id="Animation_2dv3a"]
+resource_name = "fireball_shield"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b7p2t"]
+_data = {
+"fireball_shield": SubResource("Animation_2dv3a")
+}
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_ojtx6")
@@ -208,25 +256,29 @@ root_node = NodePath("../Sprite2D")
 libraries = {
 "": SubResource("AnimationLibrary_f48eo")
 }
+speed_scale = 0.0
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../Sprite2D")
 tree_root = SubResource("AnimationNodeStateMachine_noype")
 anim_player = NodePath("../AnimationPlayer")
+parameters/attack/TimeScale/scale = 1.0
+parameters/run/TimeScale/scale = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
 position = Vector2(-2, 3)
 texture = ExtResource("2_p5cep")
 hframes = 15
 vframes = 6
-frame = 75
+frame = 78
 metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 limit_left = -416
 limit_top = -400
-limit_right = 1616
+limit_right = 1624
 limit_bottom = 1024
 metadata/_edit_lock_ = true
 
@@ -248,35 +300,60 @@ polygon = PackedVector2Array(14, -18, 24, -17, 29, -12, 32, -3, 32, 9, 25, 14, 1
 unique_name_in_owner = true
 texture = ExtResource("4_ufg48")
 
+[node name="FireballShield" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_6gxod")]
+player = NodePath("..")
+
+[node name="FireballShieldSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+texture = ExtResource("4_y6l55")
+hframes = 9
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FireballShieldSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_b7p2t")
+}
+autoplay = "fireball_shield"
+
 [node name="VisionRosePowerUpTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 20.0
 one_shot = true
 
 [node name="HasteRosePowerUpTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 20.0
+one_shot = true
 
 [node name="HUDCanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Hud" parent="HUDCanvasLayer" node_paths=PackedStringArray("vision_rose_timer") instance=ExtResource("2_b6hyq")]
+[node name="Hud" parent="HUDCanvasLayer" node_paths=PackedStringArray("vision_rose_timer", "haste_rose_timer") instance=ExtResource("2_b6hyq")]
 vision_rose_timer = NodePath("../../VisionRosePowerUpTimer")
+haste_rose_timer = NodePath("../../HasteRosePowerUpTimer")
 
 [node name="SoundEffects" type="Node" parent="."]
 
-[node name="SwordHit" type="AudioStreamPlayer2D" parent="SoundEffects"]
+[node name="SwordHit" type="AudioStreamPlayer" parent="SoundEffects"]
 unique_name_in_owner = true
 stream = ExtResource("5_k1082")
 volume_db = -20.0
 
-[node name="SwordSwing" type="AudioStreamPlayer2D" parent="SoundEffects"]
+[node name="SwordSwing" type="AudioStreamPlayer" parent="SoundEffects"]
 unique_name_in_owner = true
 stream = ExtResource("6_sxj55")
 
-[node name="VisionRosePickedUp" type="AudioStreamPlayer2D" parent="SoundEffects"]
+[node name="VisionRosePickedUp" type="AudioStreamPlayer" parent="SoundEffects"]
 unique_name_in_owner = true
 stream = ExtResource("7_t1pb3")
 volume_db = -5.0
 
-[node name="ScoreboardIncrease" type="AudioStreamPlayer2D" parent="SoundEffects"]
+[node name="HasteRosePickedUp" type="AudioStreamPlayer" parent="SoundEffects"]
+unique_name_in_owner = true
+stream = ExtResource("8_f0sj0")
+volume_db = -5.0
+
+[node name="ScoreboardIncrease" type="AudioStreamPlayer" parent="SoundEffects"]
 unique_name_in_owner = true
 stream = ExtResource("8_tfhen")
 volume_db = -25.0

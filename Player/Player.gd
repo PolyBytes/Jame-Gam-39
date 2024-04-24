@@ -7,8 +7,9 @@ signal vision_rose_picked_up
 signal haste_rose_picked_up
 signal fire_rose_picked_up
 
-const MAX_VELOCITY = 100.0
 const ACCELERATION = 1000.0
+
+@export var max_movement_velocity: float = 100
 
 @export_category("Screen Shake Properties")
 @export var SHAKE_STRENGTH: float = 60.0
@@ -21,6 +22,9 @@ const ACCELERATION = 1000.0
 @export var health_sacrifice_per_rose: int = 15
 @export var vision_rose_vision_increase_multiplier: float = 2.5
 @export var vision_rose_vision_change_time_seconds: float = 2
+@export var haste_rose_max_movement_velocity_multiplier: float = 1.5
+@export var haste_rose_speed_change_time_seconds: float = 2
+@export var haste_rose_attack_speed_multiplier: float = 2
 
 @export_category("Variables Changed By Animation (Do Not Change)")
 @export var sword_attack_can_hit: bool = false
@@ -34,6 +38,9 @@ var is_slain: bool = false
 var max_health: int = 100
 var health: int = max_health
 var shake_strength: float = 0.0
+
+var current_max_movement_velocity: float = max_movement_velocity
+var current_attack_speed_multiplier: float = 1
 
 var score: int = 0:
 	set(new_score):
@@ -61,6 +68,14 @@ func _process(delta: float) -> void:
 	shake_strength = lerp(shake_strength, 0.0, SHAKE_DECAY_RATE * delta)
 	camera.offset = get_random_offset()
 	
+	$AnimationTree.set("parameters/attack/TimeScale/scale", current_attack_speed_multiplier)
+	$AnimationTree.set("parameters/run/TimeScale/scale", (velocity.length() / max_movement_velocity))
+	
+	if $Sprite2D.flip_h:
+		%FireballShieldSprite.position.x = -6
+	else:
+		%FireballShieldSprite.position.x = 0
+
 func get_random_offset() -> Vector2:
 	return Vector2(
 		rand.randf_range(-shake_strength, shake_strength),
@@ -109,15 +124,15 @@ func update_velocity(delta: float, input_vector: Vector2):
 	
 	velocity = velocity + (input_vector.normalized() * ACCELERATION * delta)
 	
-	if velocity.length() > MAX_VELOCITY:
-		velocity = velocity.limit_length(MAX_VELOCITY)
+	if velocity.length() > current_max_movement_velocity:
+		velocity = velocity.limit_length(current_max_movement_velocity)
 
 func handle_animation_states():
 	if is_slain:
 		animation_state.travel("death")
 		return
 	
-	if Input.is_action_just_pressed("attack_primary"):
+	if Input.is_action_pressed("attack_primary"):
 		if animation_state.get_current_node() != "attack":
 			animation_state.travel("attack")
 			apply_shake()
@@ -169,7 +184,16 @@ func _on_vision_rose_power_up_timer_timeout():
 
 func _on_haste_rose_picked_up():
 	take_damage(health_sacrifice_per_rose)
+	%HasteRosePickedUp.play()
+	%HasteRosePowerUpTimer.start()
 	
+	current_attack_speed_multiplier = haste_rose_attack_speed_multiplier
+	
+	var haste_tween = get_tree().create_tween()
+	haste_tween.tween_property(self, "current_max_movement_velocity", max_movement_velocity * haste_rose_max_movement_velocity_multiplier, haste_rose_speed_change_time_seconds)
 
 func _on_haste_rose_power_up_timer_timeout():
-	pass # Replace with function body.
+	current_attack_speed_multiplier = 1
+	
+	var haste_tween = get_tree().create_tween()
+	haste_tween.tween_property(self, "current_max_movement_velocity", max_movement_velocity, haste_rose_speed_change_time_seconds)

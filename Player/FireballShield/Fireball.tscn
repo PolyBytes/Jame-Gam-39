@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://kxwmtd3lcv4w"]
+
+[ext_resource type="Texture2D" uid="uid://dhpsy5vwvlhnm" path="res://Player/FireballShield/FireBallBaseSprite.png" id="1_2n7kc"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_k1ip0"]
+blend_mode = 1
+
+[sub_resource type="Curve" id="Curve_sd3bd"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.60545, 0.0, 0, 0]
+point_count = 2
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_0s7k2"]
+colors = PackedColorArray(1, 0.388235, 0, 1, 1, 0.643137, 0, 1)
+
+[node name="FireballRoot" type="Node2D"]
+
+[node name="Fireball" type="CPUParticles2D" parent="."]
+material = SubResource("CanvasItemMaterial_k1ip0")
+local_coords = true
+draw_order = 1
+texture = ExtResource("1_2n7kc")
+direction = Vector2(0, -1)
+spread = 20.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+scale_amount_min = 0.15
+scale_amount_max = 0.75
+scale_amount_curve = SubResource("Curve_sd3bd")
+color_ramp = SubResource("Gradient_0s7k2")

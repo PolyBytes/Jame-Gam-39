@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wd13irtycv3k"
-path="res://.godot/imported/rose.png-efdf1d4890865642f1a990a40e70e687.ctex"
+uid="uid://dhpsy5vwvlhnm"
+path="res://.godot/imported/FireBallBaseSprite.png-ea28d8c3c82ef6acd79060a8fbaee6b4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Levels/rose.png"
-dest_files=["res://.godot/imported/rose.png-efdf1d4890865642f1a990a40e70e687.ctex"]
+source_file="res://Player/FireballShield/FireBallBaseSprite.png"
+dest_files=["res://.godot/imported/FireBallBaseSprite.png-ea28d8c3c82ef6acd79060a8fbaee6b4.ctex"]
 
 [params]
 

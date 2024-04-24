@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cruod710u7s31"]
 
-[ext_resource type="Texture2D" uid="uid://wd13irtycv3k" path="res://Levels/rose.png" id="1_vkq7g"]
+[ext_resource type="Texture2D" uid="uid://wd13irtycv3k" path="res://Pickups/FireRose/rose.png" id="1_vkq7g"]
 
 [sub_resource type="Curve" id="Curve_dnk57"]
 _data = [Vector2(0.0020202, 1), 0.0, 0.0, 0, 0, Vector2(0.993939, 0.00375664), 0.0, 0.0, 0, 0]
