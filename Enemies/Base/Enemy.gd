@@ -5,6 +5,7 @@ signal stunned
 @export var attack_damage: float = 5
 @export var is_alive: bool = true
 @export var max_health: int = 10
+@export var score_to_award: int = 20
 var health: int = max_health
 var target_player: CharacterBody2D
 

@@ -1,14 +1,13 @@
 extends Node
 
 var scene_root
-var flying_eye: PackedScene = preload("res://Enemies/Flying-Eye/FlyingEye.tscn")
+var flying_eye: PackedScene = preload("res://Enemies/FlyingEye/FlyingEye.tscn")
 
 var spawn_range: int = 500
 var enemy_count: int = 1
 
 func _ready():
 	scene_root = get_tree().get_first_node_in_group("level")
-	spawn_wave()
 
 func _process(_delta):
 	if Input.is_action_just_pressed("dodge_roll"):

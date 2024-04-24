@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://6hs1fx0lipvy"]
+
+[ext_resource type="Texture2D" uid="uid://dtx03kkbowlx0" path="res://Pickups/VisionRose/VisionRose.png" id="1_8btc1"]
+[ext_resource type="Script" path="res://Pickups/VisionRose/VisionRose.gd" id="1_oc3yp"]
+[ext_resource type="AudioStream" uid="uid://upetsj7xc6sy" path="res://SFX/vision rose glitter loop [2024-04-23 143607].aif.wav" id="3_gbofx"]
+
+[sub_resource type="Curve" id="Curve_gjvyd"]
+_data = [Vector2(0.0020202, 1), 0.0, 0.0, 0, 0, Vector2(0.993939, 0.00375664), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_0dvwi"]
+colors = PackedColorArray(1, 1, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_togk8"]
+size = Vector2(21, 27)
+
+[node name="VisionRose" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_oc3yp")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-1, 5)
+emission_shape = 2
+emission_sphere_radius = 8.11
+direction = Vector2(0, -1)
+gravity = Vector2(0, -10)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_gjvyd")
+color_ramp = SubResource("Gradient_0dvwi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_8btc1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_togk8")
+
+[node name="VisionRoseGlimmer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_gbofx")
+volume_db = -15.0
+autoplay = true
+max_distance = 500.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

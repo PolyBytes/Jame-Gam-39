@@ -1,27 +1,44 @@
 class_name Player extends CharacterBody2D
 
 signal health_changed(new_health: int, max_health: int)
+signal score_changed(new_score: int)
 
-@export var SHAKE_STRENGTH: float = 60.0
-@export var SHAKE_DECAY_RATE: float = 5.0
-
-@onready var camera = $Camera2D
-@onready var rand = RandomNumberGenerator.new()
-
-var shake_strength: float = 0.0
+signal vision_rose_picked_up
+signal haste_rose_picked_up
+signal fire_rose_picked_up
 
 const MAX_VELOCITY = 100.0
 const ACCELERATION = 1000.0
 
+@export_category("Screen Shake Properties")
+@export var SHAKE_STRENGTH: float = 60.0
+@export var SHAKE_DECAY_RATE: float = 5.0
+
+@export_category("Attack Properties")
+@export var sword_attack_damage: int = 4
+
+@export_category("Power Up Properties")
+@export var vision_rose_vision_increase_multiplier: float = 2.5
+@export var vision_rose_vision_change_time_seconds: float = 2
+
+@export_category("Variables Changed By Animation (Do Not Change)")
+@export var sword_attack_can_hit: bool = false
+
+@onready var camera = $Camera2D
+@onready var rand = RandomNumberGenerator.new()
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_state = animation_tree.get("parameters/playback")
-
-@export var sword_attack_can_hit: bool = false
-@export var sword_attack_damage: int = 4
 
 var is_slain: bool = false
 var max_health: int = 100
 var health: int = max_health
+var shake_strength: float = 0.0
+
+var score: int = 0:
+	set(new_score):
+		score = new_score
+		%ScoreboardIncrease.play()
+		score_changed.emit(new_score)
 
 func _ready():
 	collision_layer = 0
@@ -103,7 +120,7 @@ func handle_animation_states():
 		if animation_state.get_current_node() != "attack":
 			animation_state.travel("attack")
 			apply_shake()
-			$SwordSwing.play()
+			%SwordSwing.play()
 			return
 
 	if velocity.length() > 0:
@@ -131,8 +148,19 @@ func handle_attacking():
 		
 		if not hit_registered and enemy.is_alive:
 			hit_registered = true
-			$SwordHit.play()
+			%SwordHit.play()
 		
 		enemy.take_damage(sword_attack_damage)
 	
 	sword_attack_can_hit = false
+
+func _on_vision_rose_picked_up():
+	%VisionRosePickedUp.play()
+	%VisionRosePowerUpTimer.start()
+	
+	var vision_tween = get_tree().create_tween()
+	vision_tween.tween_property(%Vision, "texture_scale", vision_rose_vision_increase_multiplier, vision_rose_vision_change_time_seconds)
+
+func _on_vision_rose_power_up_timer_timeout():
+	var vision_tween = get_tree().create_tween()
+	vision_tween.tween_property(%Vision, "texture_scale", 1, vision_rose_vision_change_time_seconds)

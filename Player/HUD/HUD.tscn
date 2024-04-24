@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b3kfblmkpt121"]
+[gd_scene load_steps=14 format=3 uid="uid://b3kfblmkpt121"]
 
 [ext_resource type="Script" path="res://Player/HUD/HUD.gd" id="1_qukus"]
 [ext_resource type="Shader" path="res://Player/HUD/Shaders/HealthBaublePixelShader.gdshader" id="2_15g5q"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bu20hpmgtcair" path="res://Player/HUD/Textures/Bar1.png" id="6_mks22"]
 [ext_resource type="Texture2D" uid="uid://ds34mqu23mt7m" path="res://Player/HUD/Textures/Bar2.png" id="7_oaeot"]
 [ext_resource type="Texture2D" uid="uid://x5uad1urdqxv" path="res://Player/HUD/Textures/Bar3.png" id="8_luqps"]
+[ext_resource type="FontFile" uid="uid://cfwu4gd3wnwwu" path="res://Fonts/Born2bSportyV2.ttf" id="9_vaepi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_irgj6"]
 shader = ExtResource("2_15g5q")
@@ -25,15 +26,15 @@ shader_parameter/resolution = 20.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xds1v"]
 shader = ExtResource("5_kvivj")
-shader_parameter/percentage = 1.0
+shader_parameter/percentage = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0i1og"]
 shader = ExtResource("5_kvivj")
-shader_parameter/percentage = 1.0
+shader_parameter/percentage = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yy1jw"]
 shader = ExtResource("5_kvivj")
-shader_parameter/percentage = 1.0
+shader_parameter/percentage = 0.0
 
 [node name="Hud" type="Control"]
 layout_mode = 3
@@ -99,7 +100,8 @@ texture = ExtResource("6_mks22")
 stretch_mode = 4
 metadata/_edit_lock_ = true
 
-[node name="Bar2" type="TextureRect" parent="HealthBar"]
+[node name="VisionRosePowerBar" type="TextureRect" parent="HealthBar"]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_0i1og")
 layout_mode = 0
 offset_left = 93.0
@@ -121,4 +123,23 @@ offset_bottom = 72.0
 scale = Vector2(3, 3)
 texture = ExtResource("8_luqps")
 stretch_mode = 4
+metadata/_edit_lock_ = true
+
+[node name="Scoreboard" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -159.0
+offset_top = 6.0
+offset_right = -15.0
+offset_bottom = 49.0
+grow_horizontal = 0
+theme_override_fonts/normal_font = ExtResource("9_vaepi")
+theme_override_font_sizes/normal_font_size = 42
+bbcode_enabled = true
+text = "SCOREBOARD"
+fit_content = true
+autowrap_mode = 0
 metadata/_edit_lock_ = true

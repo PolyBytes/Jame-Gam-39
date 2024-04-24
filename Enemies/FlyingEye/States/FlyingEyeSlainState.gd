@@ -10,8 +10,8 @@ var parent_enemy: FlyingEyeEnemy
 func enter_state():
 	super()
 	current_enemy_despawn_time_seconds = enemy_despawn_time_seconds
-	
 	parent_enemy = enemy_state_machine.parent_enemy
+	parent_enemy.target_player.score += parent_enemy.score_to_award
 
 func process_state(delta: float) -> EnemyState:
 	if current_enemy_despawn_time_seconds > 0:

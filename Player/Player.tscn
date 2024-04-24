@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://wtvoou0ci41m"]
+[gd_scene load_steps=37 format=3 uid="uid://wtvoou0ci41m"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_ojtx6"]
 [ext_resource type="PackedScene" uid="uid://b3kfblmkpt121" path="res://Player/HUD/HUD.tscn" id="2_b6hyq"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://byw4203c2tjp5" path="res://Player/light_texture.webp" id="4_ufg48"]
 [ext_resource type="AudioStream" uid="uid://byiy7woaqq1k" path="res://SFX/char sword hit [2024-04-22 172210].aif.wav" id="5_k1082"]
 [ext_resource type="AudioStream" uid="uid://bostmyaavtorx" path="res://SFX/char sword swing [2024-04-22 172208].aif.wav" id="6_sxj55"]
+[ext_resource type="AudioStream" uid="uid://cqfhxykeoj2wu" path="res://SFX/vision rose pickup [2024-04-23 143606].aif.wav" id="7_t1pb3"]
+[ext_resource type="AudioStream" uid="uid://b85ep0ejf6pcx" path="res://SFX/point 24-04-2024.wav" id="8_tfhen"]
 
 [sub_resource type="Animation" id="Animation_ndr3j"]
 resource_name = "attack"
@@ -200,15 +202,6 @@ size = Vector2(11, 23)
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_ojtx6")
 SHAKE_STRENGTH = 1.0
-sword_attack_can_hit = true
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-2, 3)
-texture = ExtResource("2_p5cep")
-hframes = 15
-vframes = 6
-frame = 76
-metadata/_edit_lock_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
@@ -220,6 +213,14 @@ libraries = {
 root_node = NodePath("../Sprite2D")
 tree_root = SubResource("AnimationNodeStateMachine_noype")
 anim_player = NodePath("../AnimationPlayer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2, 3)
+texture = ExtResource("2_p5cep")
+hframes = 15
+vframes = 6
+frame = 75
+metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
@@ -243,19 +244,43 @@ collision_mask = 4
 unique_name_in_owner = true
 polygon = PackedVector2Array(14, -18, 24, -17, 29, -12, 32, -3, 32, 9, 25, 14, 16, 13, 6, 7, 5, -10)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="Hud" parent="CanvasLayer" instance=ExtResource("2_b6hyq")]
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
+[node name="Vision" type="PointLight2D" parent="."]
+unique_name_in_owner = true
 texture = ExtResource("4_ufg48")
-texture_scale = 2.0
 
-[node name="SwordHit" type="AudioStreamPlayer2D" parent="."]
+[node name="VisionRosePowerUpTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 20.0
+one_shot = true
+
+[node name="HUDCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Hud" parent="HUDCanvasLayer" node_paths=PackedStringArray("vision_rose_timer") instance=ExtResource("2_b6hyq")]
+vision_rose_timer = NodePath("../../VisionRosePowerUpTimer")
+
+[node name="SoundEffects" type="Node" parent="."]
+
+[node name="SwordHit" type="AudioStreamPlayer2D" parent="SoundEffects"]
+unique_name_in_owner = true
 stream = ExtResource("5_k1082")
 volume_db = -20.0
 
-[node name="SwordSwing" type="AudioStreamPlayer2D" parent="."]
+[node name="SwordSwing" type="AudioStreamPlayer2D" parent="SoundEffects"]
+unique_name_in_owner = true
 stream = ExtResource("6_sxj55")
 
-[connection signal="health_changed" from="." to="CanvasLayer/Hud" method="_on_player_health_changed"]
+[node name="VisionRosePickedUp" type="AudioStreamPlayer2D" parent="SoundEffects"]
+unique_name_in_owner = true
+stream = ExtResource("7_t1pb3")
+volume_db = -5.0
+
+[node name="ScoreboardIncrease" type="AudioStreamPlayer2D" parent="SoundEffects"]
+unique_name_in_owner = true
+stream = ExtResource("8_tfhen")
+volume_db = -25.0
+max_polyphony = 10
+
+[connection signal="health_changed" from="." to="HUDCanvasLayer/Hud" method="_on_player_health_changed"]
+[connection signal="score_changed" from="." to="HUDCanvasLayer/Hud" method="_on_player_score_changed"]
+[connection signal="vision_rose_picked_up" from="." to="." method="_on_vision_rose_picked_up"]
+[connection signal="timeout" from="VisionRosePowerUpTimer" to="." method="_on_vision_rose_power_up_timer_timeout"]
