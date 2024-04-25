@@ -1,5 +1,5 @@
 extends Control
-
+const level = preload("res://Levels/Main/Main.tscn")
 @export var wave_announcer_fade_time_seconds: float = 2
 
 @export_group("Scoreboard Properties")
@@ -50,6 +50,12 @@ func _process(delta):
 func _on_player_health_changed(new_health, max_health):
 	target_health_percentage = new_health as float / max_health
 	%HPValue.text = str(new_health)
+	
+	if new_health <= 0:
+		$ColorRect.visible = true
+		$Label.visible = true
+		$Button.visible = true
+		get_tree().paused = true
 
 func _on_player_score_changed(new_score: int):
 	var score_string_beginning: String = ""
@@ -87,3 +93,10 @@ func _on_wave_announcer_wait_delay_timeout():
 	var wave_tween = get_tree().create_tween()
 	wave_tween.set_ease(Tween.EASE_OUT)
 	wave_tween.tween_property($WaveAnnouncer, "modulate:a", 0, wave_announcer_fade_time_seconds)
+
+func _on_button_pressed():
+	$ColorRect.visible = false
+	$Label.visible = false
+	$Button.visible = false
+	get_parent().add_child(level.instance())
+	queue_free()
