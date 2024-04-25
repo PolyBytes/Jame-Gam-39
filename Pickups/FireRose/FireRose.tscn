@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cruod710u7s31"]
+[gd_scene load_steps=8 format=3 uid="uid://cruod710u7s31"]
 
 [ext_resource type="Script" path="res://Pickups/FireRose/FireRose.gd" id="1_if7ns"]
 [ext_resource type="Texture2D" uid="uid://wd13irtycv3k" path="res://Pickups/FireRose/FireRose.png" id="1_vkq7g"]
 [ext_resource type="AudioStream" uid="uid://bmufj5hxaa05h" path="res://SFX/fire rose glitter loop [2024-04-23 143559].aif.wav" id="2_tlima"]
+[ext_resource type="Texture2D" uid="uid://byw4203c2tjp5" path="res://Player/light_texture.webp" id="4_vtfdb"]
 
 [sub_resource type="Curve" id="Curve_dnk57"]
 _data = [Vector2(0.0020202, 1), 0.0, 0.0, 0, 0, Vector2(0.993939, 0.00375664), 0.0, 0.0, 0, 0]
@@ -39,9 +40,15 @@ texture = ExtResource("1_vkq7g")
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_ndi05")
 
-[node name="FireRoseGlimmer" type="AudioStreamPlayer" parent="."]
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 0, 0, 1)
+texture = ExtResource("4_vtfdb")
+texture_scale = 0.2
+
+[node name="FireRoseGlimmer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_tlima")
 volume_db = -15.0
 autoplay = true
+max_distance = 1000.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -41,4 +41,5 @@ func process_state(delta: float) -> EnemyState:
 	return null
 
 func leave_state():
+	parent_enemy.is_stunned = false
 	parent_enemy.monitoring = true

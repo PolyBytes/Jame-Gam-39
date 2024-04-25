@@ -44,10 +44,10 @@ func _process(delta: float):
 		if not area is Enemy:
 			continue
 		
+		if not area.is_alive:
+			continue
+		
+		if area.is_stunned:
+			continue
+		
 		area.take_damage(player.fire_rose_attack_damage)
-
-func _on_area_entered(area):
-	if not area is Enemy:
-		return
-	
-	

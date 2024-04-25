@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://6hs1fx0lipvy"]
+[gd_scene load_steps=8 format=3 uid="uid://6hs1fx0lipvy"]
 
 [ext_resource type="Texture2D" uid="uid://dtx03kkbowlx0" path="res://Pickups/VisionRose/VisionRose.png" id="1_8btc1"]
 [ext_resource type="Script" path="res://Pickups/VisionRose/VisionRose.gd" id="1_oc3yp"]
+[ext_resource type="Texture2D" uid="uid://byw4203c2tjp5" path="res://Player/light_texture.webp" id="3_581cv"]
 [ext_resource type="AudioStream" uid="uid://upetsj7xc6sy" path="res://SFX/vision rose glitter loop [2024-04-23 143607].aif.wav" id="3_gbofx"]
 
 [sub_resource type="Curve" id="Curve_gjvyd"]
@@ -38,10 +39,15 @@ texture = ExtResource("1_8btc1")
 position = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_togk8")
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 1, 0, 1)
+texture = ExtResource("3_581cv")
+texture_scale = 0.2
+
 [node name="VisionRoseGlimmer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_gbofx")
 volume_db = -15.0
 autoplay = true
-max_distance = 500.0
+max_distance = 1000.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

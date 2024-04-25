@@ -338,3 +338,6 @@ metadata/_edit_lock_ = true
 
 [node name="RewardIndicators" type="Node2D" parent="." groups=["reward_indicators"]]
 metadata/_edit_lock_ = true
+
+[node name="Roses" type="Node2D" parent="." groups=["rose_root_node"]]
+metadata/_edit_lock_ = true

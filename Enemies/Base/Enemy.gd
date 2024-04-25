@@ -10,6 +10,7 @@ signal stunned
 @export var health_award_chance: float = 0.5
 var health: int = max_health
 var target_player: CharacterBody2D
+var is_stunned: bool = false
 
 func _ready():
 	collision_layer = 0

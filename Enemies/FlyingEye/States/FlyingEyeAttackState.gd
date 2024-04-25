@@ -12,7 +12,6 @@ var parent_enemy: FlyingEyeEnemy
 var target_player: Player
 var target_vector: Vector2
 var target_player_position: Vector2
-var stunned: bool
 var attack_can_hit: bool
 
 func _ready():
@@ -22,7 +21,6 @@ func _ready():
 
 func enter_state():
 	super()
-	stunned = false
 	attack_can_hit = true
 	
 	parent_enemy = enemy_state_machine.parent_enemy
@@ -31,8 +29,8 @@ func enter_state():
 	if not target_player or not parent_enemy:
 		return follow_state
 	
-	if not parent_enemy.stunned.is_connected(_parent_enemy_stunned):
-		parent_enemy.stunned.connect(_parent_enemy_stunned)
+	#if not parent_enemy.stunned.is_connected(_parent_enemy_stunned):
+	#	parent_enemy.stunned.connect(_parent_enemy_stunned)
 	
 	parent_enemy.velocity = Vector2.ZERO
 	
@@ -46,7 +44,7 @@ func enter_state():
 func physics_process_state(delta: float) -> EnemyState:
 	super(delta)
 	
-	if stunned:
+	if parent_enemy.is_stunned:
 		return stunned_state
 	
 	parent_enemy.position += parent_enemy.velocity * delta
@@ -61,5 +59,5 @@ func physics_process_state(delta: float) -> EnemyState:
 	
 	return null
 
-func _parent_enemy_stunned():
-	stunned = true
+#func _parent_enemy_stunned():
+#	stunned = true

@@ -42,6 +42,7 @@ func _process(delta):
 
 func _on_player_health_changed(new_health, max_health):
 	target_health_percentage = new_health as float / max_health
+	%HPValue.text = str(new_health)
 
 func _on_player_score_changed(new_score: int):
 	var score_string_beginning: String = ""

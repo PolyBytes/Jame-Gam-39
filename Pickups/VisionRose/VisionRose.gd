@@ -6,6 +6,8 @@ class_name VisionRose extends Area2D
 func _on_body_entered(body):
 	if body is Player:
 		body.vision_rose_picked_up.emit()
+		SpawnManager.show_health_sacrifice(position, body.health_sacrifice_per_rose)
+		
 		$CPUParticles2D.emitting = false
 		
 		var fade_tween = get_tree().create_tween()

@@ -37,6 +37,8 @@ const ACCELERATION = 1000.0
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var animation_state = animation_tree.get("parameters/playback")
 
+var fire_rose_secret: PackedScene = load("res://Pickups/FireRose/FireRose.tscn")
+
 var is_slain: bool = false
 var max_health: int = 100
 var health: int = max_health
@@ -55,6 +57,7 @@ func _ready():
 	collision_layer = 0
 	set_collision_layer_value(2, true)
 	animation_state.travel("idle")
+	health_changed.emit(health, max_health)
 
 func _physics_process(delta):
 	var input_vector = Vector2.ZERO
@@ -87,6 +90,12 @@ func handle_input() -> Vector2:
 	var horizontal_direction: float = Input.get_axis("move_left", "move_right")
 	var vertical_direction: float = Input.get_axis("move_up", "move_down")
 	var input_vector: Vector2 = Vector2()
+	
+	if Input.is_action_just_pressed("secret"):
+		var new_rose = fire_rose_secret.instantiate()
+		
+		RoseManager.rose_root_node.add_child(new_rose)
+		new_rose.position = position + Vector2(0, 50)
 	
 	if horizontal_direction:
 		# Handle Sprite Horizontal Orientation
@@ -164,7 +173,10 @@ func handle_attacking():
 		if not enemy is Enemy:
 			continue
 		
-		if not hit_registered and enemy.is_alive:
+		if enemy.is_stunned or not enemy.is_alive:
+			continue
+		
+		if not hit_registered:
 			hit_registered = true
 			%SwordHit.play()
 		

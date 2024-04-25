@@ -146,7 +146,7 @@ states/idle/position = Vector2(507, 171)
 states/take_damage/node = SubResource("AnimationNodeAnimation_k6jgb")
 states/take_damage/position = Vector2(642, 274)
 transitions = ["idle", "death", SubResource("AnimationNodeStateMachineTransition_ndbyi"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_qwtsr"), "idle", "take_damage", SubResource("AnimationNodeStateMachineTransition_u7bb0"), "attack", "take_damage", SubResource("AnimationNodeStateMachineTransition_brq14"), "take_damage", "idle", SubResource("AnimationNodeStateMachineTransition_py42s"), "attack", "death", SubResource("AnimationNodeStateMachineTransition_rc3v4"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_rk75s"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_4kih3"), "take_damage", "death", SubResource("AnimationNodeStateMachineTransition_56i0s")]
-graph_offset = Vector2(171, 66)
+graph_offset = Vector2(121, -18)
 
 [sub_resource type="Curve" id="Curve_thqqt"]
 _data = [Vector2(0, 0.995117), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

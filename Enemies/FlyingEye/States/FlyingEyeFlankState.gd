@@ -16,7 +16,8 @@ class_name FlyingEyeFlankState extends FlankState
 
 var attack_cooldown_default_wait_time: float
 var random_flank_direction: int
-var stunned: bool = false
+
+var parent_enemy: Enemy
 
 func _ready():
 	super()
@@ -26,10 +27,10 @@ func _ready():
 	assert(attack_cooldown_timer, "Attack Cooldown Timer must be set.")
 	
 	attack_cooldown_default_wait_time = attack_cooldown_timer.wait_time
+	parent_enemy = enemy_state_machine.parent_enemy
 
 func enter_state():
 	super()
-	stunned = false
 	
 	if attack_cooldown_timer.time_left > 0:
 		attack_cooldown_timer.start(attack_cooldown_timer.time_left)
@@ -41,17 +42,14 @@ func enter_state():
 func physics_process_state(delta: float) -> EnemyState:
 	super(delta)
 	
-	if stunned:
+	if parent_enemy.is_stunned:
 		return stunned_state
 	
-	var parent_enemy = enemy_state_machine.parent_enemy
+	parent_enemy = enemy_state_machine.parent_enemy
 	var target_player = enemy_state_machine.parent_enemy.target_player
 	
 	if not target_player or not parent_enemy:
 		return null
-	
-	if not parent_enemy.stunned.is_connected(_parent_enemy_stunned):
-		parent_enemy.stunned.connect(_parent_enemy_stunned)
 	
 	var target_vector = parent_enemy.position.direction_to(target_player.position)
 	parent_enemy.look_direction = sign(target_vector.x)
@@ -75,6 +73,3 @@ func physics_process_state(delta: float) -> EnemyState:
 
 func leave_state():
 	attack_cooldown_timer.stop()
-
-func _parent_enemy_stunned():
-	stunned = true

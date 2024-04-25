@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwqvnyfkpdqvf"]
+
+[ext_resource type="Script" path="res://Autoloads/RoseManager/RoseManager.gd" id="1_j5mxa"]
+
+[node name="RoseManager" type="Node"]
+script = ExtResource("1_j5mxa")
+
+[node name="RoseSpawnChanceTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="timeout" from="RoseSpawnChanceTimer" to="." method="_on_rose_spawn_chance_timer_timeout"]

@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var reward_y_offset: int = 15
+@export var reward_y_offset: float = 15
 @export var reward_y_offset_time_seconds: float = 2
 
 @export var amount: int = 0:
@@ -12,10 +12,10 @@ func _ready():
 	$RichTextLabel.visible = false
 
 func start_animation():
-	$RichTextLabel.text = "[color=00ff00]+ " + str(amount) + " HP[/color]"
+	$RichTextLabel.text = "[center][color=ffffff]" + str(amount) + "[/color][/center]"
 	$RichTextLabel.visible = true
 	
-	var target_y_offset: int = position.y - reward_y_offset
+	var target_y_offset: float = position.y - reward_y_offset
 	
 	var tween = get_tree().create_tween()
 	tween.parallel().tween_property(self, "position:y", target_y_offset, reward_y_offset_time_seconds)

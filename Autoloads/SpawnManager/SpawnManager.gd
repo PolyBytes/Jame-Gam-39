@@ -7,8 +7,9 @@ var enemy_root_node: Node2D
 var player: Player
 
 var reward_indicators: Node2D
-var reward_health: PackedScene = preload("res://RewardIndicators/RewardHealth/RewardHealth.tscn")
-var reward_score: PackedScene = preload("res://RewardIndicators/RewardScore/RewardScore.tscn")
+var reward_health: PackedScene = preload("res://Indicators/RewardHealth/RewardHealth.tscn")
+var sacrifice_health: PackedScene = preload("res://Indicators/SacrificeHealth/SacrificeHealth.tscn")
+var reward_score: PackedScene = preload("res://Indicators/RewardScore/RewardScore.tscn")
 
 var flying_eye: PackedScene = preload("res://Enemies/FlyingEye/FlyingEye.tscn")
 
@@ -80,6 +81,13 @@ func show_health_reward(position: Vector2, amount: int):
 	health_reward.position = position
 	health_reward.position.y -= 5
 	health_reward.amount = amount
+
+func show_health_sacrifice(position: Vector2, amount: int):
+	var health_sacrifice = sacrifice_health.instantiate()
+	
+	reward_indicators.add_child(health_sacrifice)
+	health_sacrifice.position = position
+	health_sacrifice.amount = amount
 
 func show_score_reward(position: Vector2, amount: int):
 	var score_reward = reward_score.instantiate()
