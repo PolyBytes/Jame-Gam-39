@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1vnfsx266eik"]
+
+[ext_resource type="Script" path="res://RewardIndicators/RewardScore/RewardScore.gd" id="1_6oked"]
+[ext_resource type="FontFile" uid="uid://cfwu4gd3wnwwu" path="res://Fonts/Born2bSportyV2.ttf" id="2_mhw63"]
+
+[node name="RewardScore" type="Node2D"]
+script = ExtResource("1_6oked")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -14.0
+offset_top = -4.0
+offset_right = 42.0
+offset_bottom = 12.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/normal_font = ExtResource("2_mhw63")
+bbcode_enabled = true
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+shortcut_keys_enabled = false

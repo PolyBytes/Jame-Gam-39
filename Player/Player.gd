@@ -19,12 +19,15 @@ const ACCELERATION = 1000.0
 @export var sword_attack_damage: int = 4
 
 @export_category("Power Up Properties")
+@export var score_increase_per_rose: int = 150
 @export var health_sacrifice_per_rose: int = 15
 @export var vision_rose_vision_increase_multiplier: float = 2.5
 @export var vision_rose_vision_change_time_seconds: float = 2
 @export var haste_rose_max_movement_velocity_multiplier: float = 1.5
 @export var haste_rose_speed_change_time_seconds: float = 2
 @export var haste_rose_attack_speed_multiplier: float = 2
+@export var fire_rose_attack_damage: int = 5
+@export var fire_rose_spin_up_time_seconds: float = 2
 
 @export_category("Variables Changed By Animation (Do Not Change)")
 @export var sword_attack_can_hit: bool = false
@@ -70,11 +73,6 @@ func _process(delta: float) -> void:
 	
 	$AnimationTree.set("parameters/attack/TimeScale/scale", current_attack_speed_multiplier)
 	$AnimationTree.set("parameters/run/TimeScale/scale", (velocity.length() / max_movement_velocity))
-	
-	if $Sprite2D.flip_h:
-		%FireballShieldSprite.position.x = -6
-	else:
-		%FireballShieldSprite.position.x = 0
 
 func get_random_offset() -> Vector2:
 	return Vector2(
@@ -152,6 +150,10 @@ func take_damage(damage_amount: int):
 	if health == 0:
 		is_slain = true
 
+func heal(heal_amount: int):
+	health = clampi(health + heal_amount, 0, max_health)
+	health_changed.emit(health, max_health)
+
 func handle_attacking():
 	if not sword_attack_can_hit:
 		return
@@ -171,6 +173,7 @@ func handle_attacking():
 	sword_attack_can_hit = false
 
 func _on_vision_rose_picked_up():
+	score += score_increase_per_rose
 	take_damage(health_sacrifice_per_rose)
 	%VisionRosePickedUp.play()
 	%VisionRosePowerUpTimer.start()
@@ -183,6 +186,7 @@ func _on_vision_rose_power_up_timer_timeout():
 	vision_tween.tween_property(%Vision, "texture_scale", 1, vision_rose_vision_change_time_seconds)
 
 func _on_haste_rose_picked_up():
+	score += score_increase_per_rose
 	take_damage(health_sacrifice_per_rose)
 	%HasteRosePickedUp.play()
 	%HasteRosePowerUpTimer.start()
@@ -197,3 +201,24 @@ func _on_haste_rose_power_up_timer_timeout():
 	
 	var haste_tween = get_tree().create_tween()
 	haste_tween.tween_property(self, "current_max_movement_velocity", max_movement_velocity, haste_rose_speed_change_time_seconds)
+
+func _on_fire_rose_picked_up():
+	score += score_increase_per_rose
+	take_damage(health_sacrifice_per_rose)
+	%FireRosePickedUp.play()
+	%FireRosePowerUpTimer.start()
+	
+	%FireballShield.monitoring = true
+	
+	var fire_tween = get_tree().create_tween()
+	fire_tween.parallel().tween_property(%FireballShield, "modulate:a", 1, fire_rose_spin_up_time_seconds)
+	fire_tween.parallel().tween_property(%FireballShield, "scale", Vector2.ONE, fire_rose_spin_up_time_seconds)
+
+func _on_fire_rose_power_up_timer_timeout():
+	var fire_tween = get_tree().create_tween()
+	fire_tween.parallel().tween_property(%FireballShield, "modulate:a", 0, fire_rose_spin_up_time_seconds)
+	fire_tween.parallel().tween_property(%FireballShield, "scale", Vector2.ZERO, fire_rose_spin_up_time_seconds)
+	
+	await fire_tween.finished
+	
+	%FireballShield.monitoring = false

@@ -6,7 +6,7 @@ class_name FlyingEyeStunnedState extends StunnedState
 
 @export_group("State Properties")
 @export var stun_time_seconds: float = 1
-@export var knockback_velocity: float = 100
+@export var knockback_velocity: float = 50
 
 var current_stun_time_seconds: float
 var stun_started: bool

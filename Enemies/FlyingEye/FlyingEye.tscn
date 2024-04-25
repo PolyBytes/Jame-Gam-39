@@ -193,7 +193,7 @@ scale_amount_max = 2.0
 scale_amount_curve = SubResource("Curve_thqqt")
 
 [node name="AttackCooldownTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 2.0
 one_shot = true
 
 [node name="EnemyStateMachine" type="Node" parent="." node_paths=PackedStringArray("parent_enemy", "initial_state")]

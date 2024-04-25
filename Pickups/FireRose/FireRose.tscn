@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://cruod710u7s31"]
+
+[ext_resource type="Script" path="res://Pickups/FireRose/FireRose.gd" id="1_if7ns"]
+[ext_resource type="Texture2D" uid="uid://wd13irtycv3k" path="res://Pickups/FireRose/FireRose.png" id="1_vkq7g"]
+[ext_resource type="AudioStream" uid="uid://bmufj5hxaa05h" path="res://SFX/fire rose glitter loop [2024-04-23 143559].aif.wav" id="2_tlima"]
+
+[sub_resource type="Curve" id="Curve_dnk57"]
+_data = [Vector2(0.0020202, 1), 0.0, 0.0, 0, 0, Vector2(0.993939, 0.00375664), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_8d2fa"]
+colors = PackedColorArray(0.892482, 0, 0.187679, 1, 1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ndi05"]
+size = Vector2(21, 27)
+
+[node name="FireRose" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_if7ns")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-1, 5)
+amount = 50
+emission_shape = 2
+emission_sphere_radius = 8.11
+direction = Vector2(0, -1)
+gravity = Vector2(0, -10)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_dnk57")
+color_ramp = SubResource("Gradient_8d2fa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_vkq7g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_ndi05")
+
+[node name="FireRoseGlimmer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_tlima")
+volume_db = -15.0
+autoplay = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

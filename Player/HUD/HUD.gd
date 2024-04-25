@@ -1,5 +1,7 @@
 extends Control
 
+@export var wave_announcer_fade_time_seconds: float = 2
+
 @export_group("Scoreboard Properties")
 @export var zeros_to_pad_score: int = 8
 @export var score_color: Color = Color("ffffff")
@@ -8,6 +10,7 @@ extends Control
 @export_group("Power Bar Timers")
 @export var vision_rose_timer: Timer
 @export var haste_rose_timer: Timer
+@export var fire_rose_timer: Timer
 
 var target_health_percentage: float = 1
 var current_health_percentage: float = 1
@@ -16,9 +19,12 @@ var health_lerp_speed: float = 2
 func _ready():
 	assert(vision_rose_timer, "Vision Rose Timer must be set.")
 	assert(haste_rose_timer, "Haste Rose Timer must be set.")
+	assert(fire_rose_timer, "Fire Rose Timer must be set.")
 	
 	%HealthBauble.material.set_shader_parameter("fill_per", current_health_percentage)
 	_on_player_score_changed(0)
+	$WaveAnnouncer.modulate.a = 0
+	SpawnManager.prepare_for_next_wave.connect(_on_prepare_for_next_wave)
 
 func _process(delta):
 	if not is_equal_approx(current_health_percentage, target_health_percentage):
@@ -30,6 +36,9 @@ func _process(delta):
 	
 	if haste_rose_timer.time_left > 0:
 		%HasteRosePowerBar.material.set_shader_parameter("percentage", (haste_rose_timer.time_left / haste_rose_timer.wait_time))
+	
+	if fire_rose_timer.time_left > 0:
+		%FireRosePowerBar.material.set_shader_parameter("percentage", (fire_rose_timer.time_left / fire_rose_timer.wait_time))
 
 func _on_player_health_changed(new_health, max_health):
 	target_health_percentage = new_health as float / max_health
@@ -57,3 +66,16 @@ func _on_player_score_changed(new_score: int):
 		score_string_end += "[/color]"
 	
 	%Scoreboard.text = score_string_beginning + score_string_end
+
+func _on_prepare_for_next_wave(next_wave_number: int):
+	$WaveAnnouncer.text = "WAVE " + str(next_wave_number)
+	
+	var wave_tween = get_tree().create_tween()
+	wave_tween.set_ease(Tween.EASE_IN)
+	wave_tween.tween_property($WaveAnnouncer, "modulate:a", 1, wave_announcer_fade_time_seconds)
+	$WaveAnnouncerWaitDelay.start()
+
+func _on_wave_announcer_wait_delay_timeout():
+	var wave_tween = get_tree().create_tween()
+	wave_tween.set_ease(Tween.EASE_OUT)
+	wave_tween.tween_property($WaveAnnouncer, "modulate:a", 0, wave_announcer_fade_time_seconds)

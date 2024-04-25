@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wd13irtycv3k"
-path="res://.godot/imported/rose.png-e6df829f9af32d3df120993763c8232b.ctex"
+uid="uid://runn5opkdvbe"
+path="res://.godot/imported/tree.png-fe51cac10a166ae9cc3f2df06fc091b9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Pickups/FireRose/rose.png"
-dest_files=["res://.godot/imported/rose.png-e6df829f9af32d3df120993763c8232b.ctex"]
+source_file="res://Levels/Main/tree.png"
+dest_files=["res://.godot/imported/tree.png-fe51cac10a166ae9cc3f2df06fc091b9.ctex"]
 
 [params]
 

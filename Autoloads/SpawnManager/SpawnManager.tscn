@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://3teddg0rsvyr"]
+
+[ext_resource type="Script" path="res://Autoloads/SpawnManager/SpawnManager.gd" id="1_qea7n"]
+
+[node name="SpawnManager" type="Node"]
+script = ExtResource("1_qea7n")
+
+[node name="WaveSpawnDelay" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="prepare_for_next_wave" from="." to="." method="_on_prepare_for_next_wave"]
+[connection signal="timeout" from="WaveSpawnDelay" to="." method="_on_wave_spawn_delay_timeout"]

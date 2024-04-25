@@ -6,6 +6,8 @@ signal stunned
 @export var is_alive: bool = true
 @export var max_health: int = 10
 @export var score_to_award: int = 20
+@export var health_to_award: int = 1
+@export var health_award_chance: float = 0.5
 var health: int = max_health
 var target_player: CharacterBody2D
 

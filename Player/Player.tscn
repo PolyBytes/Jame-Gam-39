@@ -1,16 +1,19 @@
-[gd_scene load_steps=46 format=3 uid="uid://wtvoou0ci41m"]
+[gd_scene load_steps=44 format=3 uid="uid://wtvoou0ci41m"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_ojtx6"]
 [ext_resource type="PackedScene" uid="uid://b3kfblmkpt121" path="res://Player/HUD/HUD.tscn" id="2_b6hyq"]
 [ext_resource type="Texture2D" uid="uid://d3k7sj3qdya0p" path="res://Player/Player-Sprite-Sheet.png" id="2_p5cep"]
 [ext_resource type="PackedScene" uid="uid://ckwt86qe70hso" path="res://Player/FireballShield/FireballShield.tscn" id="4_6gxod"]
 [ext_resource type="Texture2D" uid="uid://byw4203c2tjp5" path="res://Player/light_texture.webp" id="4_ufg48"]
-[ext_resource type="Texture2D" uid="uid://727fk6ngiwme" path="res://Player/HUD/Textures/shield of fire.png" id="4_y6l55"]
 [ext_resource type="AudioStream" uid="uid://byiy7woaqq1k" path="res://SFX/char sword hit [2024-04-22 172210].aif.wav" id="5_k1082"]
 [ext_resource type="AudioStream" uid="uid://bostmyaavtorx" path="res://SFX/char sword swing [2024-04-22 172208].aif.wav" id="6_sxj55"]
 [ext_resource type="AudioStream" uid="uid://cqfhxykeoj2wu" path="res://SFX/vision rose pickup [2024-04-23 143606].aif.wav" id="7_t1pb3"]
 [ext_resource type="AudioStream" uid="uid://b4t6me6y3ften" path="res://SFX/haste rose pickup [2024-04-23 143601].aif.wav" id="8_f0sj0"]
 [ext_resource type="AudioStream" uid="uid://b85ep0ejf6pcx" path="res://SFX/point 24-04-2024.wav" id="8_tfhen"]
+[ext_resource type="AudioStream" uid="uid://djs1hi0enc250" path="res://SFX/fire rose pickup [2024-04-23 143557].aif.wav" id="10_8t6mi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o4jsr"]
+size = Vector2(11, 23)
 
 [sub_resource type="Animation" id="Animation_ndr3j"]
 resource_name = "attack"
@@ -222,48 +225,9 @@ states/run/position = Vector2(207, 196)
 transitions = ["idle", "roll", SubResource("AnimationNodeStateMachineTransition_lvwxd"), "idle", "block", SubResource("AnimationNodeStateMachineTransition_uxqs2"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_lo6dv"), "death", "End", SubResource("AnimationNodeStateMachineTransition_ngpva"), "block", "idle", SubResource("AnimationNodeStateMachineTransition_84h0b"), "roll", "idle", SubResource("AnimationNodeStateMachineTransition_fe1ex"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_m2bmw"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_nlarv"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_dd1v5"), "attack", "run", SubResource("AnimationNodeStateMachineTransition_ordn2"), "run", "attack", SubResource("AnimationNodeStateMachineTransition_bqdyo"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_m3mbg"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_rur5a")]
 graph_offset = Vector2(-83, -4)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o4jsr"]
-size = Vector2(11, 23)
-
-[sub_resource type="Animation" id="Animation_2dv3a"]
-resource_name = "fireball_shield"
-length = 0.9
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_b7p2t"]
-_data = {
-"fireball_shield": SubResource("Animation_2dv3a")
-}
-
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_ojtx6")
 SHAKE_STRENGTH = 1.0
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Sprite2D")
-libraries = {
-"": SubResource("AnimationLibrary_f48eo")
-}
-speed_scale = 0.0
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-root_node = NodePath("../Sprite2D")
-tree_root = SubResource("AnimationNodeStateMachine_noype")
-anim_player = NodePath("../AnimationPlayer")
-parameters/attack/TimeScale/scale = 1.0
-parameters/run/TimeScale/scale = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 1
@@ -282,11 +246,6 @@ limit_right = 1624
 limit_bottom = 1024
 metadata/_edit_lock_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -2)
-shape = SubResource("RectangleShape2D_o4jsr")
-metadata/_edit_lock_ = true
-
 [node name="AttackArea2D" type="Area2D" parent="."]
 unique_name_in_owner = true
 collision_layer = 2
@@ -296,41 +255,56 @@ collision_mask = 4
 unique_name_in_owner = true
 polygon = PackedVector2Array(14, -18, 24, -17, 29, -12, 32, -3, 32, 9, 25, 14, 16, 13, 6, 7, 5, -10)
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_o4jsr")
+metadata/_edit_lock_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_f48eo")
+}
+speed_scale = 0.0
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../Sprite2D")
+tree_root = SubResource("AnimationNodeStateMachine_noype")
+anim_player = NodePath("../AnimationPlayer")
+parameters/attack/TimeScale/scale = 1.0
+parameters/run/TimeScale/scale = 1.0
+
 [node name="Vision" type="PointLight2D" parent="."]
 unique_name_in_owner = true
 texture = ExtResource("4_ufg48")
 
 [node name="FireballShield" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_6gxod")]
+unique_name_in_owner = true
 player = NodePath("..")
-
-[node name="FireballShieldSprite" type="Sprite2D" parent="."]
-unique_name_in_owner = true
-visible = false
-texture = ExtResource("4_y6l55")
-hframes = 9
-frame = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="FireballShieldSprite"]
-libraries = {
-"": SubResource("AnimationLibrary_b7p2t")
-}
-autoplay = "fireball_shield"
-
-[node name="VisionRosePowerUpTimer" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 20.0
-one_shot = true
-
-[node name="HasteRosePowerUpTimer" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 20.0
-one_shot = true
 
 [node name="HUDCanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Hud" parent="HUDCanvasLayer" node_paths=PackedStringArray("vision_rose_timer", "haste_rose_timer") instance=ExtResource("2_b6hyq")]
-vision_rose_timer = NodePath("../../VisionRosePowerUpTimer")
-haste_rose_timer = NodePath("../../HasteRosePowerUpTimer")
+[node name="Hud" parent="HUDCanvasLayer" node_paths=PackedStringArray("vision_rose_timer", "haste_rose_timer", "fire_rose_timer") instance=ExtResource("2_b6hyq")]
+vision_rose_timer = NodePath("../../Timers/VisionRosePowerUpTimer")
+haste_rose_timer = NodePath("../../Timers/HasteRosePowerUpTimer")
+fire_rose_timer = NodePath("../../Timers/FireRosePowerUpTimer")
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="VisionRosePowerUpTimer" type="Timer" parent="Timers"]
+unique_name_in_owner = true
+wait_time = 20.0
+one_shot = true
+
+[node name="HasteRosePowerUpTimer" type="Timer" parent="Timers"]
+unique_name_in_owner = true
+wait_time = 20.0
+one_shot = true
+
+[node name="FireRosePowerUpTimer" type="Timer" parent="Timers"]
+unique_name_in_owner = true
+wait_time = 20.0
+one_shot = true
 
 [node name="SoundEffects" type="Node" parent="."]
 
@@ -353,15 +327,22 @@ unique_name_in_owner = true
 stream = ExtResource("8_f0sj0")
 volume_db = -5.0
 
+[node name="FireRosePickedUp" type="AudioStreamPlayer" parent="SoundEffects"]
+unique_name_in_owner = true
+stream = ExtResource("10_8t6mi")
+volume_db = -5.0
+
 [node name="ScoreboardIncrease" type="AudioStreamPlayer" parent="SoundEffects"]
 unique_name_in_owner = true
 stream = ExtResource("8_tfhen")
 volume_db = -25.0
-max_polyphony = 10
+pitch_scale = 0.9
 
+[connection signal="fire_rose_picked_up" from="." to="." method="_on_fire_rose_picked_up"]
 [connection signal="haste_rose_picked_up" from="." to="." method="_on_haste_rose_picked_up"]
 [connection signal="health_changed" from="." to="HUDCanvasLayer/Hud" method="_on_player_health_changed"]
 [connection signal="score_changed" from="." to="HUDCanvasLayer/Hud" method="_on_player_score_changed"]
 [connection signal="vision_rose_picked_up" from="." to="." method="_on_vision_rose_picked_up"]
-[connection signal="timeout" from="VisionRosePowerUpTimer" to="." method="_on_vision_rose_power_up_timer_timeout"]
-[connection signal="timeout" from="HasteRosePowerUpTimer" to="." method="_on_haste_rose_power_up_timer_timeout"]
+[connection signal="timeout" from="Timers/VisionRosePowerUpTimer" to="." method="_on_vision_rose_power_up_timer_timeout"]
+[connection signal="timeout" from="Timers/HasteRosePowerUpTimer" to="." method="_on_haste_rose_power_up_timer_timeout"]
+[connection signal="timeout" from="Timers/FireRosePowerUpTimer" to="." method="_on_fire_rose_power_up_timer_timeout"]
