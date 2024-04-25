@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://cfwu4gd3wnwwu" path="res://Fonts/Born2bSportyV2.ttf" id="2_mhw63"]
 
 [node name="RewardScore" type="Node2D"]
+z_index = 3
 script = ExtResource("1_6oked")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
