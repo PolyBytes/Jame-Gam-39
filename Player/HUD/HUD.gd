@@ -39,6 +39,13 @@ func _process(delta):
 	
 	if fire_rose_timer.time_left > 0:
 		%FireRosePowerBar.material.set_shader_parameter("percentage", (fire_rose_timer.time_left / fire_rose_timer.wait_time))
+	
+	var number_of_enemies: int = SpawnManager.enemy_root_node.get_child_count()
+	
+	if number_of_enemies > 0:
+		$EnemiesRemaining.text = "Enemies Remaining: " + str(number_of_enemies)
+	else:
+		$EnemiesRemaining.text = ""
 
 func _on_player_health_changed(new_health, max_health):
 	target_health_percentage = new_health as float / max_health

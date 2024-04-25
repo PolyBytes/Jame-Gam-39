@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://cdlauat43712e"]
+[gd_scene load_steps=13 format=3 uid="uid://cdlauat43712e"]
 
 [ext_resource type="PackedScene" uid="uid://wtvoou0ci41m" path="res://Player/Player.tscn" id="1_asn8q"]
 [ext_resource type="Texture2D" uid="uid://b8s1sn72yknam" path="res://Levels/Main/grass.png" id="4_m15ae"]
+[ext_resource type="Script" path="res://Levels/Main/MushroomRetreatArea.gd" id="5_dcd0m"]
 [ext_resource type="Texture2D" uid="uid://runn5opkdvbe" path="res://Levels/Main/tree.png" id="5_xgnr8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e5ueb"]
@@ -32,6 +33,9 @@ size = Vector2(20, 1480)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_33nm7"]
 size = Vector2(20, 1480)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vi13k"]
+size = Vector2(1870, 1255)
 
 [node name="Main" type="Node2D" groups=["level"]]
 y_sort_enabled = true
@@ -340,4 +344,14 @@ metadata/_edit_lock_ = true
 metadata/_edit_lock_ = true
 
 [node name="Roses" type="Node2D" parent="." groups=["rose_root_node"]]
+metadata/_edit_lock_ = true
+
+[node name="MushroomRetreatArea" type="Area2D" parent="."]
+collision_mask = 4
+script = ExtResource("5_dcd0m")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MushroomRetreatArea"]
+position = Vector2(612, 315.5)
+shape = SubResource("RectangleShape2D_vi13k")
 metadata/_edit_lock_ = true

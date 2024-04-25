@@ -1,0 +1,1 @@
+class_name MushroomRetreatArea extends Area2D

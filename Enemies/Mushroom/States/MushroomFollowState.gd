@@ -43,11 +43,19 @@ func physics_process_state(delta: float) -> EnemyState:
 	if distance_to_target <= max_attack_distance and distance_to_target >= min_attack_distance:
 		if attack_cooldown_timer.time_left == 0:
 			return attack_state
+	elif not parent_enemy.can_still_retreat:
+		if distance_to_target > max_attack_distance:
+			parent_enemy.velocity += target_vector * acceleration * delta
+		elif attack_cooldown_timer.time_left == 0:
+			return attack_state
 	elif distance_to_target > max_attack_distance:
 		parent_enemy.velocity += target_vector * acceleration * delta
 	elif distance_to_target < min_attack_distance:
-		parent_enemy.retreating = true
-		parent_enemy.velocity -= target_vector * acceleration * delta
+		if parent_enemy.can_still_retreat:
+			parent_enemy.retreating = true
+			parent_enemy.velocity -= target_vector * acceleration * delta
+		else:
+			parent_enemy.velocity = Vector2.ZERO
 	
 	if parent_enemy.velocity.length() > max_velocity:
 		parent_enemy.velocity = parent_enemy.velocity.limit_length(max_velocity)

@@ -52,6 +52,7 @@ func physics_process_state(delta: float) -> EnemyState:
 	if attack_can_hit:
 		if parent_enemy.overlaps_body(target_player):
 			target_player.take_damage(int(parent_enemy.attack_damage))
+			SpawnManager.show_health_sacrifice(target_player.position, parent_enemy.attack_damage)
 			attack_can_hit = false
 	
 	if parent_enemy.position.distance_to(target_player_position) >= attack_end_distance:

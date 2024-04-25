@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://f0hs2ojfbr54"]
+[gd_scene load_steps=37 format=3 uid="uid://f0hs2ojfbr54"]
 
 [ext_resource type="Script" path="res://Enemies/Mushroom/Mushroom.gd" id="1_78p2a"]
 [ext_resource type="Texture2D" uid="uid://dk3cd5baldfbs" path="res://Enemies/Mushroom/MushroomSpriteSheet.png" id="2_4b08h"]
@@ -10,9 +10,26 @@
 [ext_resource type="Script" path="res://Enemies/Mushroom/States/MushroomAttackState.gd" id="5_whh4s"]
 [ext_resource type="AudioStream" uid="uid://betelce3rovhm" path="res://SFX/monster 1 hit var3 [2024-04-22 172220].aif.wav" id="6_j5nty"]
 [ext_resource type="Script" path="res://Enemies/Mushroom/States/MushroomStunnedState.gd" id="6_qbn2o"]
+[ext_resource type="Script" path="res://Enemies/Mushroom/States/MushroomSlainState.gd" id="7_xklnu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f38tf"]
 size = Vector2(23, 37)
+
+[sub_resource type="Animation" id="Animation_1qo3h"]
+resource_name = "death"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [44, 45, 46, 47]
+}
 
 [sub_resource type="Animation" id="Animation_icc8e"]
 resource_name = "idle"
@@ -29,6 +46,34 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_lvwwq"]
+resource_name = "ranged_attack"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [36, 37, 38, 39, 40, 41, 42, 43, 43, 43, 43]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:attack_finished")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_ql8wc"]
@@ -62,38 +107,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [22, 23, 24, 25]
-}
-
-[sub_resource type="Animation" id="Animation_lvwwq"]
-resource_name = "ranged_attack"
-length = 1.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [36, 37, 38, 39, 40, 41, 42, 43, 43, 43, 43]
-}
-
-[sub_resource type="Animation" id="Animation_1qo3h"]
-resource_name = "death"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [44, 45, 46, 47]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xx1tf"]
@@ -161,7 +174,7 @@ states/run/position = Vector2(570, 47)
 states/take_damage/node = SubResource("AnimationNodeAnimation_ql8ge")
 states/take_damage/position = Vector2(570, 347)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_2axq3"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_x18ai"), "idle", "ranged_attack", SubResource("AnimationNodeStateMachineTransition_t2aka"), "idle", "take_damage", SubResource("AnimationNodeStateMachineTransition_8eoii"), "ranged_attack", "idle", SubResource("AnimationNodeStateMachineTransition_7jv14"), "ranged_attack", "take_damage", SubResource("AnimationNodeStateMachineTransition_snx5n"), "run", "take_damage", SubResource("AnimationNodeStateMachineTransition_rcraj"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_auoh7"), "take_damage", "idle", SubResource("AnimationNodeStateMachineTransition_igyle"), "take_damage", "death", SubResource("AnimationNodeStateMachineTransition_kxa38"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_ocx1a")]
-graph_offset = Vector2(-44, -195.703)
+graph_offset = Vector2(27, 204.297)
 
 [sub_resource type="Curve" id="Curve_w28br"]
 _data = [Vector2(0, 0.995117), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -171,13 +184,15 @@ point_count = 2
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_78p2a")
+score_to_award = 35
+health_to_award = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1, -11)
 texture = ExtResource("2_4b08h")
 hframes = 11
 vframes = 5
-frame = 3
+frame = 43
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -3.5)
@@ -221,6 +236,9 @@ script = ExtResource("4_vbd3d")
 attack_state = NodePath("../MushroomAttackState")
 stunned_state = NodePath("../MushroomStunnedState")
 attack_cooldown_timer = NodePath("../../AttackCooldownTimer")
+max_velocity = 30.0
+max_attack_distance = 200.0
+min_attack_distance = 175.0
 enemy_state_machine = NodePath("..")
 
 [node name="MushroomAttackState" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("follow_state", "stunned_state", "attack_cooldown_timer", "enemy_state_machine")]
@@ -230,8 +248,14 @@ stunned_state = NodePath("../MushroomStunnedState")
 attack_cooldown_timer = NodePath("../../AttackCooldownTimer")
 enemy_state_machine = NodePath("..")
 
-[node name="MushroomStunnedState" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy_state_machine")]
+[node name="MushroomStunnedState" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("follow_state", "slain_state", "enemy_state_machine")]
 script = ExtResource("6_qbn2o")
+follow_state = NodePath("../MushroomFollowState")
+slain_state = NodePath("../MushroomSlainState")
+enemy_state_machine = NodePath("..")
+
+[node name="MushroomSlainState" type="Node" parent="EnemyStateMachine" node_paths=PackedStringArray("enemy_state_machine")]
+script = ExtResource("7_xklnu")
 enemy_state_machine = NodePath("..")
 
 [node name="TakeDamage" type="AudioStreamPlayer2D" parent="."]
@@ -241,4 +265,6 @@ sound_1 = ExtResource("4_ruqj3")
 sound_2 = ExtResource("5_5xtmh")
 sound_3 = ExtResource("6_j5nty")
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
 [connection signal="state_changed" from="EnemyStateMachine" to="." method="_on_enemy_state_machine_state_changed"]

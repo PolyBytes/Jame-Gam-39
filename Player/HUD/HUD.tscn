@@ -176,6 +176,19 @@ text = "WAVE"
 fit_content = true
 autowrap_mode = 0
 
+[node name="EnemiesRemaining" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 609.0
+offset_right = 259.0
+offset_bottom = 649.0
+theme_override_fonts/normal_font = ExtResource("9_vaepi")
+theme_override_font_sizes/normal_font_size = 32
+text = "Enemies Remaining: 0"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
 [node name="WaveAnnouncerWaitDelay" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true

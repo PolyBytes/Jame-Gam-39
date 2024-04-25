@@ -16,6 +16,7 @@ func _ready():
 	collision_layer = 0
 	set_collision_layer_value(3, true)
 	collision_mask = 0
+	set_collision_mask_value(1, true)
 	set_collision_mask_value(2, true)
 
 func take_damage(damage_amount: int):
@@ -23,3 +24,4 @@ func take_damage(damage_amount: int):
 	
 	if health == 0:
 		is_alive = false
+		SpawnManager.enemy_slain.emit()

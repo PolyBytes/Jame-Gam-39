@@ -6,6 +6,10 @@ class_name MushroomEnemy extends Enemy
 var velocity: Vector2 = Vector2.ZERO
 var look_direction: int = 1
 var retreating: bool = false
+var can_still_retreat: bool = true
+var current_state: EnemyState
+
+@export var attack_finished: bool = true
 
 func _ready():
 	super()
@@ -19,10 +23,21 @@ func _process(_delta):
 		$Sprite2D.flip_h = true if look_direction < 0 else false
 	else:
 		$Sprite2D.flip_h = false if look_direction < 0 else true
+	
+	if not monitoring:
+		return
+	
+	if current_state is MushroomFollowState:
+		if velocity.is_equal_approx(Vector2.ZERO):
+			animation_state.travel("idle")
+		else:
+			animation_state.travel("run")
 
 func _on_enemy_state_machine_state_changed(new_state):
+	current_state = new_state
+	
 	if new_state is MushroomFollowState:
-		animation_state.travel("run")
+		pass
 	elif new_state is MushroomAttackState:
 		animation_state.travel("ranged_attack")
 	elif new_state is MushroomStunnedState:
@@ -37,3 +52,12 @@ func take_damage(damage_amount: int):
 	super(damage_amount)
 	is_stunned = true
 	$TakeDamage.play_random_sound()
+	$AttackCooldownTimer.start()
+
+func _on_area_entered(area):
+	if area is MushroomRetreatArea:
+		can_still_retreat = true
+
+func _on_area_exited(area):
+	if area is MushroomRetreatArea:
+		can_still_retreat = false

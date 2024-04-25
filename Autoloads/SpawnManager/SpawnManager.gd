@@ -1,7 +1,8 @@
 extends Node
 
 signal prepare_for_next_wave(next_wave_number: int)
-
+signal wave_start
+signal enemy_slain
 
 var enemy_root_node: Node2D
 var player: Player
@@ -12,12 +13,15 @@ var sacrifice_health: PackedScene = preload("res://Indicators/SacrificeHealth/Sa
 var reward_score: PackedScene = preload("res://Indicators/RewardScore/RewardScore.tscn")
 
 var flying_eye: PackedScene = preload("res://Enemies/FlyingEye/FlyingEye.tscn")
+var mushroom: PackedScene = preload("res://Enemies/Mushroom/Mushroom.tscn")
 
 class Wave:
 	var number_of_flying_eyes: int
+	var number_of_mushrooms: int
 	
-	func _init(p_number_of_flying_eyes: int):
+	func _init(p_number_of_flying_eyes: int, p_number_of_mushrooms: int):
 		self.number_of_flying_eyes = p_number_of_flying_eyes
+		self.number_of_mushrooms = p_number_of_mushrooms
 
 var wave_list: Array[Wave] = []
 var current_wave_count: int = 0
@@ -26,11 +30,17 @@ var number_of_waves_per_lap: int
 var enemy_spawn_locations: Array[Vector2] = []
 
 func _ready():
-	wave_list.append(Wave.new(5))
-	wave_list.append(Wave.new(10))
-	wave_list.append(Wave.new(15))
-	wave_list.append(Wave.new(20))
-	wave_list.append(Wave.new(25))
+	wave_list.append(Wave.new(3, 0))
+	wave_list.append(Wave.new(5, 1))
+	wave_list.append(Wave.new(5, 3))
+	wave_list.append(Wave.new(8, 3))
+	wave_list.append(Wave.new(10, 5))
+	wave_list.append(Wave.new(12, 5))
+	wave_list.append(Wave.new(15, 6))
+	wave_list.append(Wave.new(18, 6))
+	wave_list.append(Wave.new(21, 7))
+	wave_list.append(Wave.new(23, 8))
+	wave_list.append(Wave.new(25, 10))
 	
 	for spawn_location in get_tree().get_first_node_in_group("enemy_spawn_locations").get_children():
 		enemy_spawn_locations.append(spawn_location.position)
@@ -48,11 +58,19 @@ func _ready():
 func spawn_wave():
 	var current_wave: Wave = wave_list[current_wave_count]
 	var number_of_flying_eyes: int = (current_wave.number_of_flying_eyes * current_wave_list_lap) + current_wave.number_of_flying_eyes
+	var number_of_mushrooms: int = (current_wave.number_of_mushrooms * current_wave_list_lap) + current_wave.number_of_mushrooms
 	
 	for i in range(number_of_flying_eyes):
 		var enemy = flying_eye.instantiate()
 		enemy_root_node.add_child(enemy)
 		enemy.position = enemy_spawn_locations.pick_random()
+	
+	for i in range(number_of_mushrooms):
+		var enemy = mushroom.instantiate()
+		enemy_root_node.add_child(enemy)
+		enemy.position = enemy_spawn_locations.pick_random()
+
+	wave_start.emit()
 
 func _on_enemy_slain(_enemy: Node2D):
 	# You have to subtract 1 because the get_child_count() method has not changed count yet.
