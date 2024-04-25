@@ -269,6 +269,9 @@ speed_scale = 0.0
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_f48eo")
+}
 tree_root = SubResource("AnimationNodeStateMachine_noype")
 anim_player = NodePath("../AnimationPlayer")
 parameters/attack/TimeScale/scale = 1.0

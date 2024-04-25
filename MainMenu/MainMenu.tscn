@@ -1,0 +1,116 @@
+[gd_scene load_steps=9 format=3 uid="uid://bqwwq2im30d1c"]
+
+[ext_resource type="Script" path="res://MainMenu/MainMenu.gd" id="1_1fyg8"]
+[ext_resource type="Texture2D" uid="uid://c73ut8rgk8bqi" path="res://MainMenu/logooo.png" id="1_b62vl"]
+[ext_resource type="FontFile" uid="uid://cfwu4gd3wnwwu" path="res://Fonts/Born2bSportyV2.ttf" id="2_j4i1k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c7oro"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8ywf1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ynsgo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yumi5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q7bhp"]
+
+[node name="MarginContainer" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1fyg8")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.180392, 0.101961, 0.196078, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+texture = ExtResource("1_b62vl")
+
+[node name="CenterContainer" type="CenterContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_j4i1k")
+theme_override_font_sizes/font_size = 30
+text = ">"
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.737255, 0.0627451, 0.607843, 1)
+theme_override_fonts/font = ExtResource("2_j4i1k")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_c7oro")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8ywf1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ynsgo")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_yumi5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_q7bhp")
+text = "START"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_j4i1k")
+theme_override_font_sizes/font_size = 30
+text = ">"
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.737255, 0.0627451, 0.607843, 1)
+theme_override_fonts/font = ExtResource("2_j4i1k")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_c7oro")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8ywf1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ynsgo")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_yumi5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_q7bhp")
+text = "OPTIONS"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_j4i1k")
+theme_override_font_sizes/font_size = 30
+text = ">"
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer/CenterContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.737255, 0.0627451, 0.607843, 1)
+theme_override_fonts/font = ExtResource("2_j4i1k")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxEmpty_c7oro")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8ywf1")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ynsgo")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_yumi5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_q7bhp")
+text = "EXIT"
