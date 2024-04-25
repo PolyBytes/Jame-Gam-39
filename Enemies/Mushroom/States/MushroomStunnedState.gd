@@ -5,7 +5,7 @@ class_name MushroomStunnedState extends StunnedState
 @export var slain_state: MushroomSlainState
 
 @export_group("State Properties")
-@export var stun_time_seconds: float = 1
+@export var stun_time_seconds: float = 0.65
 
 var current_stun_time_seconds: float
 var parent_enemy: MushroomEnemy

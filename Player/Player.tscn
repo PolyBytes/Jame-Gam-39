@@ -253,7 +253,7 @@ collision_mask = 4
 
 [node name="SwordSwingCollisionPolygon" type="CollisionPolygon2D" parent="AttackArea2D"]
 unique_name_in_owner = true
-polygon = PackedVector2Array(14, -18, 24, -17, 29, -12, 32, -3, 32, 9, 25, 14, 16, 13, 6, 7, 5, -10)
+polygon = PackedVector2Array(15, -20, 28, -19, 33, -13, 35, -3, 32, 10, 25, 14, 16, 13, 6, 7, 5, -10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -2)
@@ -316,6 +316,7 @@ volume_db = -20.0
 [node name="SwordSwing" type="AudioStreamPlayer" parent="SoundEffects"]
 unique_name_in_owner = true
 stream = ExtResource("6_sxj55")
+volume_db = -15.0
 
 [node name="VisionRosePickedUp" type="AudioStreamPlayer" parent="SoundEffects"]
 unique_name_in_owner = true
@@ -339,10 +340,13 @@ volume_db = -25.0
 pitch_scale = 0.9
 
 [connection signal="fire_rose_picked_up" from="." to="." method="_on_fire_rose_picked_up"]
+[connection signal="fire_rose_picked_up" from="." to="HUDCanvasLayer/Hud" method="_on_player_fire_rose_picked_up"]
 [connection signal="haste_rose_picked_up" from="." to="." method="_on_haste_rose_picked_up"]
+[connection signal="haste_rose_picked_up" from="." to="HUDCanvasLayer/Hud" method="_on_player_haste_rose_picked_up"]
 [connection signal="health_changed" from="." to="HUDCanvasLayer/Hud" method="_on_player_health_changed"]
 [connection signal="score_changed" from="." to="HUDCanvasLayer/Hud" method="_on_player_score_changed"]
 [connection signal="vision_rose_picked_up" from="." to="." method="_on_vision_rose_picked_up"]
+[connection signal="vision_rose_picked_up" from="." to="HUDCanvasLayer/Hud" method="_on_player_vision_rose_picked_up"]
 [connection signal="timeout" from="Timers/VisionRosePowerUpTimer" to="." method="_on_vision_rose_power_up_timer_timeout"]
 [connection signal="timeout" from="Timers/HasteRosePowerUpTimer" to="." method="_on_haste_rose_power_up_timer_timeout"]
 [connection signal="timeout" from="Timers/FireRosePowerUpTimer" to="." method="_on_fire_rose_power_up_timer_timeout"]

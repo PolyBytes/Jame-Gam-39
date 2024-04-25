@@ -20,7 +20,7 @@ const ACCELERATION = 1000.0
 
 @export_category("Power Up Properties")
 @export var score_increase_per_rose: int = 150
-@export var health_sacrifice_per_rose: int = 15
+@export var health_sacrifice_per_rose: int = 10
 @export var vision_rose_vision_increase_multiplier: float = 2.5
 @export var vision_rose_vision_change_time_seconds: float = 2
 @export var haste_rose_max_movement_velocity_multiplier: float = 1.5
@@ -158,6 +158,13 @@ func take_damage(damage_amount: int):
 	
 	if health == 0:
 		is_slain = true
+		if is_instance_valid($FireballShield):
+			%FireRosePowerUpTimer.stop()
+			$FireballShield.hide()
+			$FireballShield.collision_layer = 0
+			$FireballShield.collision_mask = 0
+			collision_layer = 0
+			collision_mask = 0
 
 func heal(heal_amount: int):
 	health = clampi(health + heal_amount, 0, max_health)

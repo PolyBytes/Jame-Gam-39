@@ -185,7 +185,8 @@ collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_78p2a")
 score_to_award = 35
-health_to_award = 3
+health_to_award = 5
+health_award_chance = 0.75
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1, -11)
@@ -259,7 +260,7 @@ script = ExtResource("7_xklnu")
 enemy_state_machine = NodePath("..")
 
 [node name="TakeDamage" type="AudioStreamPlayer2D" parent="."]
-volume_db = -20.0
+volume_db = -5.0
 script = ExtResource("3_d28nt")
 sound_1 = ExtResource("4_ruqj3")
 sound_2 = ExtResource("5_5xtmh")

@@ -154,6 +154,7 @@ point_count = 2
 
 [node name="FlyingEye" type="Area2D"]
 script = ExtResource("1_osiu1")
+health_to_award = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2.5, -6.5)

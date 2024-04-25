@@ -1,6 +1,6 @@
 class_name MushroomEnemyProjectile extends Area2D
 
-@export var projectile_damage: int = 10
+@export var projectile_damage: int = 5
 @export var movement_speed: float = 100
 
 var attack_can_hit: bool = true

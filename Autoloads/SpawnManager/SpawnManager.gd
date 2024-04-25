@@ -49,15 +49,15 @@ func reset():
 func _ready():
 	wave_list.append(Wave.new(3, 0))
 	wave_list.append(Wave.new(5, 1))
-	wave_list.append(Wave.new(5, 3))
-	wave_list.append(Wave.new(8, 3))
-	wave_list.append(Wave.new(10, 5))
-	wave_list.append(Wave.new(12, 5))
-	wave_list.append(Wave.new(15, 6))
-	wave_list.append(Wave.new(18, 6))
-	wave_list.append(Wave.new(21, 7))
-	wave_list.append(Wave.new(23, 8))
-	wave_list.append(Wave.new(25, 10))
+	wave_list.append(Wave.new(7, 1))
+	wave_list.append(Wave.new(8, 2))
+	wave_list.append(Wave.new(10, 2))
+	wave_list.append(Wave.new(12, 3))
+	wave_list.append(Wave.new(15, 3))
+	wave_list.append(Wave.new(18, 4))
+	wave_list.append(Wave.new(21, 4))
+	wave_list.append(Wave.new(23, 5))
+	wave_list.append(Wave.new(25, 6))
 	
 	for spawn_location in get_tree().get_first_node_in_group("enemy_spawn_locations").get_children():
 		enemy_spawn_locations.append(spawn_location.position)
@@ -71,6 +71,9 @@ func _ready():
 	
 	await player.ready
 	prepare_for_next_wave.emit(1)
+
+func get_wave_number() -> int:
+	return (current_wave_list_lap * number_of_waves_per_lap) + current_wave_count + 1
 
 func spawn_wave():
 	if resetting:
@@ -106,7 +109,7 @@ func _on_enemy_slain(_enemy: Node2D):
 		current_wave_list_lap += 1
 		current_wave_count = 0
 	
-	var next_wave_number: int = (current_wave_list_lap * number_of_waves_per_lap) + current_wave_count + 1
+	var next_wave_number: int = get_wave_number()
 	prepare_for_next_wave.emit(next_wave_number)
 
 func _on_prepare_for_next_wave(_next_wave_number: int):

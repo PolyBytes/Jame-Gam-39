@@ -1,6 +1,7 @@
 extends Control
 #const level = preload("res://Levels/Main/Main.tscn")
 @export var wave_announcer_fade_time_seconds: float = 2
+@export var power_up_announcer_fade_time_seconds: float = 1
 
 @export_group("Scoreboard Properties")
 @export var zeros_to_pad_score: int = 8
@@ -24,6 +25,7 @@ func _ready():
 	%HealthBauble.material.set_shader_parameter("fill_per", current_health_percentage)
 	_on_player_score_changed(0)
 	$WaveAnnouncer.modulate.a = 0
+	$PowerUpAnnouncer.modulate.a = 0
 	SpawnManager.prepare_for_next_wave.connect(_on_prepare_for_next_wave)
 
 func _process(delta):
@@ -56,10 +58,10 @@ func _on_player_health_changed(new_health, max_health):
 		$Label.visible = true
 		#$Button.visible = true
 		$Score.visible = true
-		get_tree().paused = true
+		#get_tree().paused = true
 
 func _on_player_score_changed(new_score: int):
-	$Score.text = "Final Score\n" + str(new_score)
+	$Score.text = "Wave " + str(SpawnManager.get_wave_number()) + "\nFinal Score\n" + str(new_score)
 	
 	var score_string_beginning: String = ""
 	var score_string_end: String = ""
@@ -101,8 +103,27 @@ func _on_button_pressed():
 	$ColorRect.visible = false
 	$Label.visible = false
 	$Score.visible = true
-	#$Button.visible = false
-	#get_tree().paused = false
-	#get_tree().get_first_node_in_group("spawn_manager").reset()
+
+func show_power_up_indicator(text: String):
+	$PowerUpAnnouncer.modulate.a = 0
+	$PowerUpAnnouncer.text = text
 	
+	var tween = get_tree().create_tween()
+	tween.tween_property($PowerUpAnnouncer, "modulate:a", 1, power_up_announcer_fade_time_seconds)
 	
+	await tween.finished
+	
+	$PowerUpAnnouncerWaitDelay.start()
+
+func _on_player_fire_rose_picked_up():
+	show_power_up_indicator("FLAME BARRIER")
+
+func _on_player_haste_rose_picked_up():
+	show_power_up_indicator("SUPER SPEED")
+
+func _on_player_vision_rose_picked_up():
+	show_power_up_indicator("ENHANCED VISION")
+
+func _on_power_up_announcer_wait_delay_timeout():
+	var tween = get_tree().create_tween()
+	tween.tween_property($PowerUpAnnouncer, "modulate:a", 0, power_up_announcer_fade_time_seconds)

@@ -21,6 +21,10 @@ Music="res://Autoloads/Music.tscn"
 SpawnManager="*res://Autoloads/SpawnManager/SpawnManager.tscn"
 RoseManager="*res://Autoloads/RoseManager/RoseManager.tscn"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [filesystem]
 
 import/blender/enabled=false
