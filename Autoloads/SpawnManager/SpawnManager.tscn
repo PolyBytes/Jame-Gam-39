@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Autoloads/SpawnManager/SpawnManager.gd" id="1_qea7n"]
 
-[node name="SpawnManager" type="Node"]
+[node name="SpawnManager" type="Node" groups=["spawn_manager"]]
 script = ExtResource("1_qea7n")
 
 [node name="WaveSpawnDelay" type="Timer" parent="."]

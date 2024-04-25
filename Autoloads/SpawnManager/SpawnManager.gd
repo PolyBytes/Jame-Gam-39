@@ -15,6 +15,8 @@ var reward_score: PackedScene = preload("res://Indicators/RewardScore/RewardScor
 var flying_eye: PackedScene = preload("res://Enemies/FlyingEye/FlyingEye.tscn")
 var mushroom: PackedScene = preload("res://Enemies/Mushroom/Mushroom.tscn")
 
+var resetting: bool = false
+
 class Wave:
 	var number_of_flying_eyes: int
 	var number_of_mushrooms: int
@@ -28,6 +30,21 @@ var current_wave_count: int = 0
 var current_wave_list_lap: int = 0
 var number_of_waves_per_lap: int
 var enemy_spawn_locations: Array[Vector2] = []
+
+func reset():
+	wave_list = []
+	current_wave_count = 0
+	current_wave_list_lap = 0
+	enemy_spawn_locations = []
+	
+	for enemy in enemy_root_node.get_children():
+		enemy.queue_free()
+	
+	for rose in RoseManager.rose_root_node.get_children():
+		rose.queue_free()
+	
+	_ready()
+	resetting = false
 
 func _ready():
 	wave_list.append(Wave.new(3, 0))
@@ -56,6 +73,9 @@ func _ready():
 	prepare_for_next_wave.emit(1)
 
 func spawn_wave():
+	if resetting:
+		return
+	
 	var current_wave: Wave = wave_list[current_wave_count]
 	var number_of_flying_eyes: int = (current_wave.number_of_flying_eyes * current_wave_list_lap) + current_wave.number_of_flying_eyes
 	var number_of_mushrooms: int = (current_wave.number_of_mushrooms * current_wave_list_lap) + current_wave.number_of_mushrooms
@@ -73,6 +93,9 @@ func spawn_wave():
 	wave_start.emit()
 
 func _on_enemy_slain(_enemy: Node2D):
+	if resetting:
+		return
+	
 	# You have to subtract 1 because the get_child_count() method has not changed count yet.
 	if enemy_root_node.get_child_count() - 1 != 0:
 		return
@@ -87,9 +110,15 @@ func _on_enemy_slain(_enemy: Node2D):
 	prepare_for_next_wave.emit(next_wave_number)
 
 func _on_prepare_for_next_wave(_next_wave_number: int):
+	if resetting:
+		return
+	
 	$WaveSpawnDelay.start()
 
 func _on_wave_spawn_delay_timeout():
+	if resetting:
+		return
+	
 	spawn_wave()
 
 func show_health_reward(position: Vector2, amount: int):

@@ -1,5 +1,5 @@
 extends Control
-const level = preload("res://Levels/Main/Main.tscn")
+#const level = preload("res://Levels/Main/Main.tscn")
 @export var wave_announcer_fade_time_seconds: float = 2
 
 @export_group("Scoreboard Properties")
@@ -54,10 +54,13 @@ func _on_player_health_changed(new_health, max_health):
 	if new_health <= 0:
 		$ColorRect.visible = true
 		$Label.visible = true
-		$Button.visible = true
+		#$Button.visible = true
+		$Score.visible = true
 		get_tree().paused = true
 
 func _on_player_score_changed(new_score: int):
+	$Score.text = "Final Score\n" + str(new_score)
+	
 	var score_string_beginning: String = ""
 	var score_string_end: String = ""
 	var number_of_zeros: int = zeros_to_pad_score
@@ -97,6 +100,9 @@ func _on_wave_announcer_wait_delay_timeout():
 func _on_button_pressed():
 	$ColorRect.visible = false
 	$Label.visible = false
-	$Button.visible = false
-	get_parent().add_child(level.instance())
-	queue_free()
+	$Score.visible = true
+	#$Button.visible = false
+	#get_tree().paused = false
+	#get_tree().get_first_node_in_group("spawn_manager").reset()
+	
+	

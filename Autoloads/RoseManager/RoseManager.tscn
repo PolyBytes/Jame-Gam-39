@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Autoloads/RoseManager/RoseManager.gd" id="1_j5mxa"]
 
-[node name="RoseManager" type="Node"]
+[node name="RoseManager" type="Node" groups=["rose_manager"]]
 script = ExtResource("1_j5mxa")
 
 [node name="RoseSpawnChanceTimer" type="Timer" parent="."]
