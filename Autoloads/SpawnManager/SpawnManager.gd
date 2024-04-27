@@ -5,6 +5,7 @@ signal wave_start
 signal enemy_slain
 
 var enemy_root_node: Node2D
+var mushroom_projectiles_root_node: Node2D
 var player: Player
 
 var reward_indicators: Node2D
@@ -64,13 +65,14 @@ func _ready():
 	
 	number_of_waves_per_lap = wave_list.size()
 	enemy_root_node = get_tree().get_first_node_in_group("enemy_root_node")
+	mushroom_projectiles_root_node = get_tree().get_first_node_in_group("mushroom_projectiles")
 	player = get_tree().get_first_node_in_group("player")
 	reward_indicators = get_tree().get_first_node_in_group("reward_indicators")
 	
 	enemy_root_node.child_exiting_tree.connect(_on_enemy_slain)
 	
 	await player.ready
-	prepare_for_next_wave.emit(1)
+	prepare_for_next_wave.emit(get_wave_number())
 
 func get_wave_number() -> int:
 	return (current_wave_list_lap * number_of_waves_per_lap) + current_wave_count + 1

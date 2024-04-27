@@ -30,7 +30,7 @@ func enter_state():
 	
 	var projectile = attack_projectile.instantiate()
 	
-	SpawnManager.enemy_root_node.add_child(projectile)
+	SpawnManager.mushroom_projectiles_root_node.add_child(projectile)
 	projectile.position = parent_enemy.position
 	projectile.target_vector = target_vector
 

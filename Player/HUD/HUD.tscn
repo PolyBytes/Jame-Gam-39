@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b3kfblmkpt121"]
+[gd_scene load_steps=17 format=3 uid="uid://b3kfblmkpt121"]
 
 [ext_resource type="Script" path="res://Player/HUD/HUD.gd" id="1_qukus"]
 [ext_resource type="Shader" path="res://Player/HUD/Shaders/HealthBaublePixelShader.gdshader" id="2_15g5q"]
@@ -35,6 +35,23 @@ shader_parameter/percentage = 0.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yy1jw"]
 shader = ExtResource("5_kvivj")
 shader_parameter/percentage = 0.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_y13qv"]
+size = Vector2(0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_klecl"]
+bg_color = Color(1, 0.286275, 0.223529, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ykabh"]
+bg_color = Color(1, 0.3675, 0.31, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="Hud" type="Control"]
 layout_mode = 3
@@ -188,65 +205,7 @@ fit_content = true
 scroll_active = false
 autowrap_mode = 0
 
-[node name="WaveAnnouncerWaitDelay" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.65098)
-
-[node name="Label" type="Label" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -194.0
-offset_top = -156.0
-offset_right = 201.0
-offset_bottom = -56.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 0.286275, 0.223529, 1)
-theme_override_fonts/font = ExtResource("9_vaepi")
-theme_override_font_sizes/font_size = 100
-text = "GAME OVER"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Score" type="Label" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -143.0
-offset_top = -71.0
-offset_right = 141.0
-offset_bottom = 127.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("9_vaepi")
-theme_override_font_sizes/font_size = 64
-text = "WAVE 100
-FINAL SCORE
-3"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="PowerUpAnnouncer" type="Label" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -261,6 +220,220 @@ theme_override_font_sizes/font_size = 64
 text = "POWER UP"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="GameOverScreen" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="GameOverScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.65098)
+
+[node name="Label" type="Label" parent="GameOverScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -191.0
+offset_top = -176.0
+offset_right = 204.0
+offset_bottom = -76.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.286275, 0.223529, 1)
+theme_override_fonts/font = ExtResource("9_vaepi")
+theme_override_font_sizes/font_size = 100
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="GameOverScreen"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -56.0
+offset_right = 142.0
+offset_bottom = 142.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_vaepi")
+theme_override_font_sizes/font_size = 64
+text = "WAVE 100
+FINAL SCORE
+3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseScreen" type="Control" parent="."]
+process_mode = 3
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="PauseScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.65098)
+metadata/_edit_lock_ = true
+
+[node name="PausedLabel" type="Label" parent="PauseScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -191.0
+offset_top = -254.0
+offset_right = 204.0
+offset_bottom = -154.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.286275, 0.223529, 1)
+theme_override_fonts/font = ExtResource("9_vaepi")
+theme_override_font_sizes/font_size = 100
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="CurrentScore" type="Label" parent="PauseScreen"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -142.0
+offset_top = -134.0
+offset_right = 142.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_vaepi")
+theme_override_font_sizes/font_size = 64
+text = "WAVE 100
+SCORE
+3"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="MasterVolume" type="Label" parent="PauseScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.5
+offset_top = 78.0
+offset_right = 80.5
+offset_bottom = 106.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_vaepi")
+theme_override_font_sizes/font_size = 28
+text = "MASTER VOLUME"
+metadata/_edit_lock_ = true
+
+[node name="MasterVolumeSlider" type="HSlider" parent="PauseScreen"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = 110.0
+offset_right = 130.0
+offset_bottom = 126.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_icons/grabber = SubResource("PlaceholderTexture2D_y13qv")
+theme_override_icons/grabber_highlight = SubResource("PlaceholderTexture2D_y13qv")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_klecl")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_ykabh")
+min_value = -30.0
+max_value = 0.0
+step = 0.25
+metadata/_edit_lock_ = true
+
+[node name="MusicVolume" type="Label" parent="PauseScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.0
+offset_top = 141.0
+offset_right = 71.0
+offset_bottom = 169.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("9_vaepi")
+theme_override_font_sizes/font_size = 28
+text = "MUSIC VOLUME"
+metadata/_edit_lock_ = true
+
+[node name="MusicVolumeSlider" type="HSlider" parent="PauseScreen"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = 172.5
+offset_right = 130.0
+offset_bottom = 188.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_icons/grabber = SubResource("PlaceholderTexture2D_y13qv")
+theme_override_icons/grabber_highlight = SubResource("PlaceholderTexture2D_y13qv")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_klecl")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxFlat_ykabh")
+min_value = -30.0
+max_value = 0.0
+step = 0.25
+value = -12.0
+metadata/_edit_lock_ = true
+
+[node name="WaveAnnouncerWaitDelay" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 
 [node name="PowerUpAnnouncerWaitDelay" type="Timer" parent="."]
 wait_time = 2.0

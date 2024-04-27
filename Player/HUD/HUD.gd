@@ -27,6 +27,7 @@ func _ready():
 	$WaveAnnouncer.modulate.a = 0
 	$PowerUpAnnouncer.modulate.a = 0
 	SpawnManager.prepare_for_next_wave.connect(_on_prepare_for_next_wave)
+	PauseManager.pause_screen = $PauseScreen
 
 func _process(delta):
 	if not is_equal_approx(current_health_percentage, target_health_percentage):
@@ -54,14 +55,14 @@ func _on_player_health_changed(new_health, max_health):
 	%HPValue.text = str(new_health)
 	
 	if new_health <= 0:
-		$ColorRect.visible = true
-		$Label.visible = true
-		#$Button.visible = true
-		$Score.visible = true
-		#get_tree().paused = true
+		$GameOverScreen.visible = true
 
 func _on_player_score_changed(new_score: int):
-	$Score.text = "Wave " + str(SpawnManager.get_wave_number()) + "\nFinal Score\n" + str(new_score)
+	var current_wave = str(SpawnManager.get_wave_number())
+	var current_score = str(new_score)
+	
+	%Score.text = "Wave " + current_wave + "\nFinal Score\n" + current_score
+	%CurrentScore.text = "Wave " + current_wave + "\nScore\n" + current_score
 	
 	var score_string_beginning: String = ""
 	var score_string_end: String = ""
@@ -98,11 +99,6 @@ func _on_wave_announcer_wait_delay_timeout():
 	var wave_tween = get_tree().create_tween()
 	wave_tween.set_ease(Tween.EASE_OUT)
 	wave_tween.tween_property($WaveAnnouncer, "modulate:a", 0, wave_announcer_fade_time_seconds)
-
-func _on_button_pressed():
-	$ColorRect.visible = false
-	$Label.visible = false
-	$Score.visible = true
 
 func show_power_up_indicator(text: String):
 	$PowerUpAnnouncer.modulate.a = 0
