@@ -357,3 +357,4 @@ shape = SubResource("RectangleShape2D_vi13k")
 metadata/_edit_lock_ = true
 
 [node name="MushroomProjectiles" type="Node2D" parent="." groups=["mushroom_projectiles"]]
+metadata/_edit_lock_ = true
