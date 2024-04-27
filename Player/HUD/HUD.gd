@@ -26,6 +26,7 @@ func _ready():
 	_on_player_score_changed(0)
 	$WaveAnnouncer.modulate.a = 0
 	$PowerUpAnnouncer.modulate.a = 0
+	$PauseScreen.visible = false
 	SpawnManager.prepare_for_next_wave.connect(_on_prepare_for_next_wave)
 	PauseManager.pause_screen = $PauseScreen
 
