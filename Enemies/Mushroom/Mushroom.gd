@@ -14,7 +14,6 @@ var current_state: EnemyState
 func _ready():
 	super()
 	target_player = get_tree().get_first_node_in_group("player")
-	print(target_player)
 	animation_state.travel("idle")
 
 func _process(_delta):

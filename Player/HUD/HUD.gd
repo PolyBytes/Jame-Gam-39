@@ -91,6 +91,12 @@ func _on_player_score_changed(new_score: int):
 func _on_prepare_for_next_wave(next_wave_number: int):
 	$WaveAnnouncer.text = "WAVE " + str(next_wave_number)
 	
+	var current_wave = str(next_wave_number)
+	var current_score = str(SpawnManager.player.score)
+	
+	%Score.text = "Wave " + current_wave + "\nFinal Score\n" + current_score
+	%CurrentScore.text = "Wave " + current_wave + "\nScore\n" + current_score
+	
 	var wave_tween = get_tree().create_tween()
 	wave_tween.set_ease(Tween.EASE_IN)
 	wave_tween.tween_property($WaveAnnouncer, "modulate:a", 1, wave_announcer_fade_time_seconds)
